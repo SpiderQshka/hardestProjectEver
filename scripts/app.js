@@ -4,37 +4,40 @@ class App{
             {
                 name: 'Food',
                 subitems: [
-                    'Water'
+                    {
+                        name: 'Water',
+                        cost: 100
+                    }
                 ]
             },
             {
                 name: 'Health',
                 subitems: [
-                    'Water'
+                    
                 ]
             },
             {
                 name: 'Transport',
                 subitems: [
-                    'Water'
+                    
                 ]
             },
             {
                 name: 'Clothes',
                 subitems: [
-                    'Water'
+                    
                 ]
             },
             {
                 name: 'House',
                 subitems: [
-                    'Water'
+                    
                 ]
             },
             {
                 name: 'Sport',
                 subitems: [
-                    'Water'
+                    
                 ]
             }
         ];
@@ -42,11 +45,15 @@ class App{
             {
                 name: 'Salary',
                 subitems: [
-                    'Colledge'
+                    {
+                        name: 'Colledge',
+                        cost: 1000
+                    }
                 ]
             }
         ];
         this.balance = 0;
+        this.currency = 'BYN'
         this.dateForShow = 'today';
     }
     setBalance(v){
@@ -57,29 +64,26 @@ class App{
     getBalance(){
         return this.balance;
     }
+    getIncomes(){
+        return this.incomes;
+    }
+    getOutlays(){
+        return this.outlays;
+    }
+    getCurrency(){
+        return this.currency;
+    }
     setNewOutlayCategory(name){
         this.outlays.push({
             name,
             subitems: []
         })
     }
-    getOutlaysCategories(){
-        const result = this.outlays.map(
-            outlay => outlay.name
-        );
-        return result;
-    }
     setNewIncomeCategory(name){
         this.incomes.push({
             name,
             subitems: []
         })
-    }
-    getIncomesCategories(){
-        const result = this.incomes.map(
-            income => income.name
-        );
-        return result;
     }
     setDate(date){
         this.dateForShow = date;

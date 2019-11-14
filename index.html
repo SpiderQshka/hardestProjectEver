@@ -87,13 +87,7 @@
         <fieldset>
           <legend>Add New Outlay</legend>
           <label name='dateInput'>Date: <input type="date"></label>
-          <label name='categoryInput'>Category: <select name="categoryOption">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
+          <label name='categoryInput'>Category: <select id='outlayCategoryInput'>
           </select></label>
           <label name='costInput'>Cost: <input type="number" min='1'><span class='currency'>BYN</span></label>
           <label name='infoInput'>Additional info: <input type="text"></label>
@@ -104,8 +98,7 @@
         <fieldset>
           <legend>Add New Income</legend>
           <label name='dateInput'>Date: <input type="date"></label>
-          <label name='categoryInput'>Category: <select name="categoryOption">
-            <option value="1">1</option>
+          <label name='categoryInput'>Category: <select name="categoryOption" id='incomeCategoryInput'>
           </select></label>
           <label name='costInput'>Income: <input type="number" min='1'><span class='currency'>BYN</span></label>
           <label name='infoInput'>Additional info: <input type="text"></label>
