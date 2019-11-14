@@ -90,10 +90,23 @@
 /*!********************!*\
   !*** ./src/app.js ***!
   \********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("// import 'bootstrap/scss/bootstrap.scss';\r\n\r\nconsole.log('Hi!')\n\n//# sourceURL=webpack:///./src/app.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scripts_main_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/main.js */ \"./src/scripts/main.js\");\n// import 'bootstrap/scss/bootstrap.scss';\r\n\r\n\r\nconst app = new _scripts_main_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\r\nconsole.log(app.getOutlaysCategories())\n\n//# sourceURL=webpack:///./src/app.js?");
+
+/***/ }),
+
+/***/ "./src/scripts/main.js":
+/*!*****************************!*\
+  !*** ./src/scripts/main.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nclass App{\r\n    constructor(){\r\n        this.outlays = [\r\n            {\r\n                name: 'Food',\r\n                subitems: [\r\n                    'Water'\r\n                ]\r\n            }\r\n        ];\r\n        this.incomes = [\r\n            {\r\n                name: 'Salary',\r\n                subitems: [\r\n                    'Colledge'\r\n                ]\r\n            }\r\n        ];\r\n        this.balance = 0;\r\n        this.dateForShow = 'today';\r\n    }\r\n    setBalance(v){\r\n        if(v){\r\n            this.balance = v;\r\n        }\r\n    }\r\n    getBalance(){\r\n        return this.balance;\r\n    }\r\n    setNewOutlayCategory(name){\r\n        this.outlays.push({\r\n            name,\r\n            subitems: []\r\n        })\r\n    }\r\n    getOutlaysCategories(){\r\n        const result = this.outlays.map(\r\n            outlay => outlay.name\r\n        );\r\n        return result;\r\n    }\r\n    setNewIncomeCategory(name){\r\n        this.incomes.push({\r\n            name,\r\n            subitems: []\r\n        })\r\n    }\r\n    getIncomesCategories(){\r\n        const result = this.incomes.map(\r\n            income => income.name\r\n        );\r\n        return result;\r\n    }\r\n    setDate(date){\r\n        this.dateForShow = date;\r\n    }\r\n    getDate(){\r\n        return this.dateForShow;\r\n    }\r\n}\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./src/scripts/main.js?");
 
 /***/ })
 
