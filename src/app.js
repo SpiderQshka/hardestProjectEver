@@ -1,3 +1,3 @@
-import 'bootstrap/scss/bootstrap.scss';
+// import 'bootstrap/scss/bootstrap.scss';
 
 console.log('Hi!')
