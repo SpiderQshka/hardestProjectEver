@@ -26,7 +26,8 @@ const fillIncomesCategories = () => {
                          const li = document.createElement('li');
                          const span = document.createElement('span');
                          span.classList.add('cost');
-                         span.innerHTML = `, cost: ${item.cost} ${currentCurency}`;
+                         span.innerHTML = `, cost: ${item.cost} ${currentCurency}. 
+                                            Date: ${item.date}`;
                          li.innerHTML = item.name;
                          li.appendChild(span);
                          ul.appendChild(li)
@@ -67,10 +68,9 @@ const fillOutlaysCategories = () => {
     )
 }
 
-const fillOutlayCategoryInput = () => {
+const fillOutlaysCategoryInput = () => {
     const categoriesLength = outlayCategoryInput.options.length;
     for(let i = categoriesLength; i >= 0; i--){
-        console.log(i)
         outlayCategoryInput.options.remove(i)
     }
     const categories = app.getOutlays();
@@ -86,7 +86,6 @@ const fillOutlayCategoryInput = () => {
 const fillIncomesCategoryInput = () => {
     const categoriesLength = incomeCategoryInput.options.length;
     for(let i = categoriesLength; i >= 0; i--){
-        console.log(i)
         incomeCategoryInput.options.remove(i)
     }
     const categories = app.getIncomes();
@@ -99,11 +98,16 @@ const fillIncomesCategoryInput = () => {
     )
 }
 
+const fillBalance = () => {
+    balance.innerHTML = app.balance
+}
+
 const updateAll = () => {
     fillIncomesCategories()
     fillOutlaysCategories()
-    fillOutlayCategoryInput()
+    fillOutlaysCategoryInput()
     fillIncomesCategoryInput()
+    fillBalance()
 }
 
 updateAll();

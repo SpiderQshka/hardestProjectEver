@@ -46,9 +46,22 @@ class App{
                 ]
             }
         ];
-        this.balance = 0;
+        this.balance = this.updateBalance();
         this.currency = 'BYN'
         this.dateForShow = 'today';
+    }
+    updateBalance(){
+        return this.balance = this.incomes.reduce(
+            (sum, income) => sum += income.subitems.reduce(
+                (itemsSum, item) => itemsSum += +item.cost, 0
+            ), 0
+        )
+        - 
+        this.outlays.reduce(
+            (sum, outlay) => sum += outlay.subitems.reduce(
+                (itemsSum, item) => itemsSum += +item.cost, 0
+            ), 0
+        )
     }
     setBalance(v){
         if(v){
@@ -72,6 +85,7 @@ class App{
                 date
             }
         )
+        this.updateBalance()
     }
     setNewOutlay(category, name, cost, date){
         const categoryObject = this.outlays.filter(
@@ -84,6 +98,7 @@ class App{
                 date
             }
         )
+        this.updateBalance()
     }
     getOutlays(){
         return this.outlays;
