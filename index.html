@@ -86,22 +86,24 @@
       <form id="addNewOutlay">
         <fieldset>
           <legend>Add New Outlay</legend>
-          <label name='dateInput'>Date: <input type="date"></label>
-          <label name='categoryInput'>Category: <select id='outlayCategoryInput'>
+          <label name='name'>Name: <input type="text" name='nameInput'></label>
+          <label name='date'>Date: <input type="date" name='dateInput'></label>
+          <label name='category'>Category: <select name="categoryInput" id='outlayCategoryInput'>
           </select></label>
-          <label name='costInput'>Cost: <input type="number" min='1'><span class='currency'>BYN</span></label>
-          <label name='infoInput'>Additional info: <input type="text"></label>
+          <label name='cost'>Income: <input type="number" min='1' name="costInput"><span class='currency'>BYN</span></label>
+          <label name='info'>Additional info: <input type="text" name="infoInput"></label>
           <input type="submit">
         </fieldset>
       </form>
       <form id="addNewIncome">
         <fieldset>
           <legend>Add New Income</legend>
-          <label name='dateInput'>Date: <input type="date"></label>
-          <label name='categoryInput'>Category: <select name="categoryOption" id='incomeCategoryInput'>
+          <label name='name'>Name: <input type="text" name='nameInput'></label>
+          <label name='date'>Date: <input type="date" name='dateInput'></label>
+          <label name='category'>Category: <select name="categoryInput" id='incomeCategoryInput'>
           </select></label>
-          <label name='costInput'>Income: <input type="number" min='1'><span class='currency'>BYN</span></label>
-          <label name='infoInput'>Additional info: <input type="text"></label>
+          <label name='cost'>Income: <input type="number" min='1' name="costInput"><span class='currency'>BYN</span></label>
+          <label name='info'>Additional info: <input type="text" name="infoInput"></label>
           <input type="submit">
         </fieldset>
       </form>

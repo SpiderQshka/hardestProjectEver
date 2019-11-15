@@ -4,10 +4,7 @@ class App{
             {
                 name: 'Food',
                 subitems: [
-                    {
-                        name: 'Water',
-                        cost: 100
-                    }
+
                 ]
             },
             {
@@ -45,10 +42,7 @@ class App{
             {
                 name: 'Salary',
                 subitems: [
-                    {
-                        name: 'Colledge',
-                        cost: 1000
-                    }
+
                 ]
             }
         ];
@@ -66,6 +60,30 @@ class App{
     }
     getIncomes(){
         return this.incomes;
+    }
+    setNewIncome(category, name, cost, date){
+        const categoryObject = this.incomes.filter(
+            incCategory => incCategory.name === category
+        )[0];
+        categoryObject.subitems.push(
+            {
+                name,
+                cost,
+                date
+            }
+        )
+    }
+    setNewOutlay(category, name, cost, date){
+        const categoryObject = this.outlays.filter(
+            incCategory => incCategory.name === category
+        )[0];
+        categoryObject.subitems.push(
+            {
+                name,
+                cost,
+                date
+            }
+        )
     }
     getOutlays(){
         return this.outlays;
