@@ -46,6 +46,8 @@ class App{
                 ]
             }
         ];
+        this.incomesForShow = this.incomes;
+        this.outlaysForShow = this.outlays;
         this.balance = this.updateBalance();
         this.currency = 'BYN'
         this.dateForShow = 'today';
@@ -118,8 +120,63 @@ class App{
             subitems: []
         })
     }
+    isDateInRange(date, range){
+        switch(date){
+            case('day'):
+                console.log('day')
+                break;
+            case('week'):
+                console.log('week');
+                break;
+            case('month'):
+                console.log('month');
+                break;
+            case('year'):
+                console.log('year');
+                break;
+            case('all'):
+                console.log('all');
+                break;
+        }
+    }
     setDate(date){
         this.dateForShow = date;
+        const dayMscds = 86400000;
+        switch(this.dateForShow){
+            case('day'):
+                console.log('day');
+                this.outlaysForShow =
+                    this.outlays.map(
+                        category => 
+                            category.subitems.filter(
+                                item => {
+                                    const itemDate = new Date(item.date);
+                                    return (Date.now() - itemDate.getTime() < dayMscds)
+                                }
+                        )
+                    )
+                console.log(this.outlaysForShow)
+                break;
+            case('week'):
+                console.log('week');
+                break;
+            case('month'):
+                console.log('month');
+                break;
+            case('year'):
+                console.log('year');
+                break;
+            case('all'):
+                console.log('all');
+                break;
+        }
+        // this.outlays.forEach(
+        //     category => category.subitems.forEach(
+        //         item => console.log(item.date)
+        //     )
+        // )
+        const dateObj = new Date(this.outlays[0].subitems[0].date);
+        console.log((Date.now() - dateObj.getTime()) < dayMscds)
     }
     getDate(){
         return this.dateForShow;

@@ -7,6 +7,7 @@ const outlaysCategories = document.getElementById('outlaysCategories');
 const incomesCategories = document.getElementById('incomesCategories');
 const outlayCategoryInput = document.getElementById('outlayCategoryInput');
 const incomeCategoryInput = document.getElementById('incomeCategoryInput');
+const dateForm = document.getElementById('dateForm');
 const addNewIncomeForm = document.getElementById('addNewIncome');
 const addNewOutlayForm = document.getElementById('addNewOutlay');
 
@@ -134,4 +135,8 @@ addNewOutlayForm.addEventListener('submit', e => {
         elements.nameInput.value];
     app.setNewOutlay(category, name, cost, date)
     updateAll()
+})
+
+dateForm.addEventListener('change', e => {
+    app.setDate(e.target.value)
 })

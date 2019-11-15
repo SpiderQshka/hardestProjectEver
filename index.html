@@ -26,33 +26,36 @@
         <div id="date">
           <h2>Date</h2>
         </div>
+        <form name='dateForm' id='dateForm'>
         <ul id="dateList" class="btn-group" data-toggle="buttons">
           <li>
             <label class="btn btn-light active">
-              <input type="radio" name="date" id="" autocomplete="off" checked>Day
+              <input type="radio" value='day' name="dateInput" id="" autocomplete="off" checked>Day
             </label>
           </li>
           <li>            
             <label class="btn btn-light">
-              <input type="radio" name="date" id="" autocomplete="off">Week
+              <input type="radio" value='week' name="dateInput" id="" autocomplete="off">Week
             </label>
           </li>
           <li>            
             <label class="btn btn-light">
-              <input type="radio" name="date" id="" autocomplete="off">Month
+              <input type="radio" value='month' name="dateInput" id="" autocomplete="off">Month
             </label> 
           </li>
           <li>            
             <label class="btn btn-light">
-              <input type="radio" name="date" id="" autocomplete="off">Year
+              <input type="radio" value='year' name="dateInput" id="" autocomplete="off">Year
             </label>
           </li>
           <li>            
             <label class="btn btn-light">
-              <input type="radio" name="date" id="" autocomplete="off">All
+              <input type="radio" value='all' name="dateInput" id="" autocomplete="off">All
             </label>
           </li>
         </ul>
+        </form>
+        
         <div id="settings">
             <h2>Settings</h2>
             <button>Add new outlay category</button>
