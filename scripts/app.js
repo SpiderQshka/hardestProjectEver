@@ -53,13 +53,13 @@ class App{
         this.dateForShow = 'today';
     }
     updateBalance(){
-        return this.balance = this.incomes.reduce(
+        return this.balance = this.incomesForShow.reduce(
             (sum, income) => sum += income.subitems.reduce(
                 (itemsSum, item) => itemsSum += +item.cost, 0
             ), 0
         )
         - 
-        this.outlays.reduce(
+        this.outlaysForShow.reduce(
             (sum, outlay) => sum += outlay.subitems.reduce(
                 (itemsSum, item) => itemsSum += +item.cost, 0
             ), 0
@@ -74,7 +74,16 @@ class App{
         return this.balance;
     }
     getIncomes(){
-        return this.incomes;
+        return this.incomesForShow;
+    }
+    getOutlays(){
+        return this.outlaysForShow;
+    }
+    updateOutlays(){
+        this.outlaysForShow = this.outlays;
+    }
+    updateIncomes(){
+        this.incomesForShow = this.incomes;
     }
     setNewIncome(category, name, cost, date){
         const categoryObject = this.incomes.filter(
@@ -87,6 +96,8 @@ class App{
                 date
             }
         )
+        this.sortItemsByDate()
+        this.updateIncomes()
         this.updateBalance()
     }
     setNewOutlay(category, name, cost, date){
@@ -100,10 +111,9 @@ class App{
                 date
             }
         )
+        this.sortItemsByDate()
+        this.updateIncomes()
         this.updateBalance()
-    }
-    getOutlays(){
-        return this.outlays;
     }
     getCurrency(){
         return this.currency;
@@ -121,62 +131,55 @@ class App{
         })
     }
     isDateInRange(date, range){
-        switch(date){
+        const dayMscds = 86400000;
+        switch(range){
             case('day'):
-                console.log('day')
-                break;
+                return date < dayMscds
             case('week'):
-                console.log('week');
-                break;
+                return date < dayMscds * 7
             case('month'):
-                console.log('month');
-                break;
+                return date < dayMscds * 30
             case('year'):
-                console.log('year');
-                break;
+                return date < dayMscds * 365
             case('all'):
-                console.log('all');
-                break;
+                return true;
         }
     }
     setDate(date){
         this.dateForShow = date;
-        const dayMscds = 86400000;
-        switch(this.dateForShow){
-            case('day'):
-                console.log('day');
-                this.outlaysForShow =
-                    this.outlays.map(
-                        category => 
-                            category.subitems.filter(
-                                item => {
-                                    const itemDate = new Date(item.date);
-                                    return (Date.now() - itemDate.getTime() < dayMscds)
-                                }
-                        )
-                    )
-                console.log(this.outlaysForShow)
-                break;
-            case('week'):
-                console.log('week');
-                break;
-            case('month'):
-                console.log('month');
-                break;
-            case('year'):
-                console.log('year');
-                break;
-            case('all'):
-                console.log('all');
-                break;
-        }
-        // this.outlays.forEach(
-        //     category => category.subitems.forEach(
-        //         item => console.log(item.date)
-        //     )
-        // )
-        const dateObj = new Date(this.outlays[0].subitems[0].date);
-        console.log((Date.now() - dateObj.getTime()) < dayMscds)
+        this.sortItemsByDate()
+    }
+    sortItemsByDate(){
+        this.outlaysForShow =
+        this.outlays.map(
+            category => {
+                return {
+                    name: category.name,
+                    subitems: category.subitems.filter(
+                        item => {
+                            const itemDate = new Date(item.date);
+                            return this.isDateInRange(Date.now() - itemDate.getTime(), this.dateForShow)
+                        }
+                    ) 
+                }
+            }        
+        )
+
+        this.incomesForShow =
+            this.incomes.map(
+                category => {
+                    return {
+                        name: category.name,
+                        subitems: category.subitems.filter(
+                            item => {
+                                const itemDate = new Date(item.date);
+                                return this.isDateInRange(Date.now() - itemDate.getTime(), this.dateForShow)
+                            }
+                        ) 
+                    }
+                }  
+            )
+        this.updateBalance()
     }
     getDate(){
         return this.dateForShow;

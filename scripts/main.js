@@ -139,4 +139,5 @@ addNewOutlayForm.addEventListener('submit', e => {
 
 dateForm.addEventListener('change', e => {
     app.setDate(e.target.value)
+    updateAll()
 })
