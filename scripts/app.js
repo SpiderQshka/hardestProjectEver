@@ -1,44 +1,48 @@
 class App{
     constructor(){
-        this.outlays = [
-            {
-                name: 'Food',
-                subitems: [
+        this.outlays = JSON.parse(localStorage.getItem('appData')) ? 
+            JSON.parse(localStorage.getItem('appData')).outlays :
+            [
+                {
+                    name: 'Food',
+                    subitems: [
 
-                ]
-            },
-            {
-                name: 'Health',
-                subitems: [
-                    
-                ]
-            },
-            {
-                name: 'Transport',
-                subitems: [
-                    
-                ]
-            },
-            {
-                name: 'Clothes',
-                subitems: [
-                    
-                ]
-            },
-            {
-                name: 'House',
-                subitems: [
-                    
-                ]
-            },
-            {
-                name: 'Sport',
-                subitems: [
-                    
-                ]
-            }
-        ];
-        this.incomes = [
+                    ]
+                },
+                {
+                    name: 'Health',
+                    subitems: [
+                        
+                    ]
+                },
+                {
+                    name: 'Transport',
+                    subitems: [
+                        
+                    ]
+                },
+                {
+                    name: 'Clothes',
+                    subitems: [
+                        
+                    ]
+                },
+                {
+                    name: 'House',
+                    subitems: [
+                        
+                    ]
+                },
+                {
+                    name: 'Sport',
+                    subitems: [
+                        
+                    ]
+                }
+            ];
+        this.incomes = JSON.parse(localStorage.getItem('appData')) ? 
+            JSON.parse(localStorage.getItem('appData')).incomes :
+            [
             {
                 name: 'Salary',
                 subitems: [
@@ -49,8 +53,18 @@ class App{
         this.incomesForShow = this.incomes;
         this.outlaysForShow = this.outlays;
         this.balance = this.updateBalance();
-        this.currency = 'BYN'
-        this.dateForShow = 'today';
+        this.currency = JSON.parse(localStorage.getItem('appData')) ?
+            JSON.parse(localStorage.getItem('appData')).currency :
+            'BYN'
+        this.dateForShow = 'all';
+    }
+    setStorage(){
+        const dataObj = {
+            outlays: this.outlays,
+            incomes: this.incomes,
+            currency: this.currency,
+        }
+        localStorage.setItem('appData', JSON.stringify(dataObj))
     }
     updateBalance(){
         return this.balance = this.incomesForShow.reduce(
@@ -64,11 +78,6 @@ class App{
                 (itemsSum, item) => itemsSum += +item.cost, 0
             ), 0
         )
-    }
-    setBalance(v){
-        if(v){
-            this.balance = v;
-        }
     }
     getBalance(){
         return this.balance;
@@ -99,6 +108,7 @@ class App{
         this.sortItemsByDate()
         this.updateIncomes()
         this.updateBalance()
+        this.setStorage()
     }
     setNewOutlay(category, name, cost, date){
         const categoryObject = this.outlays.filter(
@@ -114,6 +124,7 @@ class App{
         this.sortItemsByDate()
         this.updateIncomes()
         this.updateBalance()
+        this.setStorage()
     }
     getCurrency(){
         return this.currency;
