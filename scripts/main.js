@@ -13,6 +13,10 @@ const addNewIncomeForm = document.getElementById('addNewIncome');
 const addNewOutlayForm = document.getElementById('addNewOutlay');
 const addNewIncomeBtn = document.getElementById('addNewIncomeBtn');
 const addNewOutlayBtn = document.getElementById('addNewOutlayBtn');
+const addNewIncomeCategoryInput = document.getElementById('addNewIncomeCategoryInput');
+const addNewOutlayCategoryInput = document.getElementById('addNewOutlayCategoryInput');
+const addNewIncomeCategoryBtn = document.getElementById('addNewIncomeCategoryBtn');
+const addNewOutlayCategoryBtn = document.getElementById('addNewOutlayCategoryBtn');
 
 const currentCurency = app.getCurrency();
 
@@ -139,9 +143,14 @@ addNewIncomeForm.addEventListener('submit', e => {
         elements.costInput.value,
         elements.nameInput.value,
         elements.colorInput.value];
-    app.setNewIncome(category, name, cost, date, color)
-    updateAll()
-    addNewIncomeForm.classList.remove('show')
+    if(!(date && category && cost && name && color)){
+        alert('All field should be filled')
+    } else {
+        app.setNewIncome(category, name, cost, date, color)
+        updateAll()
+        addNewIncomeForm.classList.remove('show')
+    }
+    
 })
 
 addNewOutlayForm.addEventListener('submit', e => {
@@ -153,9 +162,13 @@ addNewOutlayForm.addEventListener('submit', e => {
         elements.costInput.value,
         elements.nameInput.value,
         elements.colorInput.value];
-    app.setNewOutlay(category, name, cost, date, color)
-    updateAll()
-    addNewOutlayForm.classList.remove('show')
+    if(!(date && category && cost && name && color)){
+        alert('All field should be filled')
+    } else {
+        app.setNewOutlay(category, name, cost, date, color)
+        updateAll()
+        addNewIncomeForm.classList.remove('show')
+    }
 })
 
 dateForm.addEventListener('change', e => {
@@ -163,11 +176,30 @@ dateForm.addEventListener('change', e => {
     updateAll()
 })
 
-addNewIncomeBtn.onclick = e => {
+addNewIncomeBtn.onclick = () => {
     addNewIncomeForm.classList.add('show')
 }
 
+addNewIncomeBtn.ondblclick = () => {
+    addNewIncomeForm.classList.remove('show')
+}
 
-addNewOutlayBtn.onclick = e => {
+addNewOutlayBtn.onclick = () => {
     addNewOutlayForm.classList.add('show')
+}
+
+addNewOutlayBtn.ondblclick = () => {
+    addNewOutlayForm.classList.remove('show')
+}
+
+addNewIncomeCategoryBtn.onclick = () => {
+    const v = addNewIncomeCategoryInput.value;
+    app.setNewIncomeCategory(v);
+    updateAll()
+}
+
+addNewOutlayCategoryBtn.onclick = () => {
+    const v = addNewOutlayCategoryInput.value;
+    app.setNewOutlayCategory(v);
+    updateAll()
 }
