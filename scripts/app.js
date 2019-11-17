@@ -106,7 +106,8 @@ class App{
     getCurrency(){
         return this.currency;
     }
-    setNewIncome(category, name, cost, date){
+    setNewIncome(category, name, cost, date, color){
+        console.log(color)
         const categoryObject = this.incomes.filter(
             incCategory => incCategory.name === category
         )[0];
@@ -114,14 +115,16 @@ class App{
             {
                 name,
                 cost,
-                date
+                date,
+                color
             }
         )
         this.filterDateAndDeleteUnused()
         this.updateBalance()
         this.setData()
     }
-    setNewOutlay(category, name, cost, date){
+    setNewOutlay(category, name, cost, date, color){
+        console.log(color)
         const categoryObject = this.outlays.filter(
             incCategory => incCategory.name === category
         )[0];
@@ -129,7 +132,8 @@ class App{
             {
                 name,
                 cost,
-                date
+                date,
+                color
             }
         )
         // this.updateIncomes()

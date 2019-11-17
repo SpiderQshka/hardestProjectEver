@@ -2,7 +2,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Money Manager</title>
+    <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
     <div>
@@ -65,13 +68,12 @@
       <footer>
         <div id="addNewIncomesOutlaysBtns">
           <h2>Add</h2>
-          <button>Add new outlay</button>
-          <button>Add new income</button>
+          <button id='addNewIncomeBtn'>Add new income</button>
+          <button id='addNewOutlayBtn'>Add new outlay</button>
         </div>
       </footer>
     </div>
-    <div id="modal">
-      <form id="addNewOutlay">
+      <form id="addNewOutlay" class="modal">
         <fieldset>
           <legend>Add New Outlay</legend>
           <label name='name'>Name: <input type="text" name='nameInput'></label>
@@ -79,11 +81,11 @@
           <label name='category'>Category: <select name="categoryInput" id='outlayCategoryInput'>
           </select></label>
           <label name='cost'>Outlay: <input type="number" min='1' name="costInput"><span class='currency'>BYN</span></label>
-          <label name='info'>Additional info: <input type="text" name="infoInput"></label>
+          <label name='color'>Label color: <input type="color" name="colorInput"></label>
           <input type="submit">
         </fieldset>
       </form>
-      <form id="addNewIncome">
+      <form id="addNewIncome" class="modal">
         <fieldset>
           <legend>Add New Income</legend>
           <label name='name'>Name: <input type="text" name='nameInput'></label>
@@ -91,12 +93,10 @@
           <label name='category'>Category: <select name="categoryInput" id='incomeCategoryInput'>
           </select></label>
           <label name='cost'>Income: <input type="number" min='1' name="costInput"><span class='currency'>BYN</span></label>
-          <label name='info'>Additional info: <input type="text" name="infoInput"></label>
+          <label name='color'>Label color: <input type="color" name="colorInput"></label>
           <input type="submit">
         </fieldset>
       </form>
-      
-    </div>
     <script type="module" src="./scripts/main.js"></script>
   </body>
 </html>

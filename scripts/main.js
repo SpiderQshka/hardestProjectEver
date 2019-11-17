@@ -11,6 +11,8 @@ const incomeCategoryInput = document.getElementById('incomeCategoryInput');
 const dateForm = document.getElementById('dateForm');
 const addNewIncomeForm = document.getElementById('addNewIncome');
 const addNewOutlayForm = document.getElementById('addNewOutlay');
+const addNewIncomeBtn = document.getElementById('addNewIncomeBtn');
+const addNewOutlayBtn = document.getElementById('addNewOutlayBtn');
 
 const currentCurency = app.getCurrency();
 
@@ -21,17 +23,24 @@ const fillIncomesCategories = () => {
         category => {
             const li = document.createElement('li');
             li.innerHTML = category.name
-            if(category.subitems[0]){
+            if(!!category.subitems.length){
                 const ul = document.createElement('ul');
                 category.subitems.forEach(
                     item => {
                          const li = document.createElement('li');
-                         const span = document.createElement('span');
-                         span.classList.add('cost');
-                         span.innerHTML = `, cost: ${item.cost} ${currentCurency}. 
-                                            Date: ${item.date}`;
-                         li.innerHTML = item.name;
-                         li.appendChild(span);
+                         const name = document.createElement('span');
+                         const cost = document.createElement('span');
+                         const date = document.createElement('span');
+                         name.classList.add('name');
+                         name.style.color = item.color;
+                         cost.classList.add('cost');
+                         date.classList.add('date')
+                         name.innerHTML = item.name;
+                         cost.innerHTML = `, cost: ${item.cost} ${currentCurency}. `;
+                         date.innerHTML = `Date: ${item.date}`;
+                         li.appendChild(name);
+                         li.appendChild(cost);
+                         li.appendChild(date);
                          ul.appendChild(li)
                     }
                 )
@@ -49,17 +58,24 @@ const fillOutlaysCategories = () => {
         category => {
             const li = document.createElement('li');
             li.innerHTML = category.name
-            if(category.subitems[0]){
+            if(!!category.subitems.length){
                 const ul = document.createElement('ul');
                 category.subitems.forEach(
                     item => {
                          const li = document.createElement('li');
-                         const span = document.createElement('span');
-                         span.classList.add('cost');
-                         span.innerHTML = `, cost: ${item.cost} ${currentCurency}. 
-                                            Date: ${item.date}`;
-                         li.innerHTML = item.name;
-                         li.appendChild(span);
+                         const name = document.createElement('span');
+                         const cost = document.createElement('span');
+                         const date = document.createElement('span');
+                         name.classList.add('name');
+                         name.style.color = item.color;
+                         cost.classList.add('cost');
+                         date.classList.add('date');
+                         name.innerHTML = item.name;
+                         cost.innerHTML = `, cost: ${item.cost} ${currentCurency}. `;
+                         date.innerHTML = `Date: ${item.date}`;
+                         li.appendChild(name);
+                         li.appendChild(cost);
+                         li.appendChild(date);
                          ul.appendChild(li)
                     }
                 )
@@ -101,7 +117,7 @@ const fillIncomesCategoryInput = () => {
 }
 
 const fillBalance = () => {
-    balance.innerHTML = app.balance
+    balance.innerHTML = app.getBalance()
 }
 
 const updateAll = () => {
@@ -117,28 +133,41 @@ updateAll();
 addNewIncomeForm.addEventListener('submit', e => {
     e.preventDefault()
     const elements = e.target.elements;
-    const [date, category, cost, name] =
+    const [date, category, cost, name, color] =
         [elements.dateInput.value,
         elements.categoryInput.value,
         elements.costInput.value,
-        elements.nameInput.value];
-    app.setNewIncome(category, name, cost, date)
+        elements.nameInput.value,
+        elements.colorInput.value];
+    app.setNewIncome(category, name, cost, date, color)
     updateAll()
+    addNewIncomeForm.classList.remove('show')
 })
 
 addNewOutlayForm.addEventListener('submit', e => {
     e.preventDefault()
     const elements = e.target.elements;
-    const [date, category, cost, name] =
+    const [date, category, cost, name, color] =
         [elements.dateInput.value,
         elements.categoryInput.value,
         elements.costInput.value,
-        elements.nameInput.value];
-    app.setNewOutlay(category, name, cost, date)
+        elements.nameInput.value,
+        elements.colorInput.value];
+    app.setNewOutlay(category, name, cost, date, color)
     updateAll()
+    addNewOutlayForm.classList.remove('show')
 })
 
 dateForm.addEventListener('change', e => {
     app.setDate(e.target.value)
     updateAll()
 })
+
+addNewIncomeBtn.onclick = e => {
+    addNewIncomeForm.classList.add('show')
+}
+
+
+addNewOutlayBtn.onclick = e => {
+    addNewOutlayForm.classList.add('show')
+}
