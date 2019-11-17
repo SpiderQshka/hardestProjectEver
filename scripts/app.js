@@ -1,7 +1,6 @@
 class App{
     constructor(){
-        this.outlays = JSON.parse(localStorage.getItem('appData')) ? 
-            JSON.parse(localStorage.getItem('appData')).outlays :
+        this.outlays = 
             [
                 {
                     name: 'Food',
@@ -40,25 +39,30 @@ class App{
                     ]
                 }
             ];
-        this.incomes = JSON.parse(localStorage.getItem('appData')) ? 
-            JSON.parse(localStorage.getItem('appData')).incomes :
+        this.incomes = 
             [
-            {
-                name: 'Salary',
-                subitems: [
+                {
+                    name: 'Salary',
+                    subitems: [
 
-                ]
-            }
-        ];
-        this.incomesForShow = this.incomes;
-        this.outlaysForShow = this.outlays;
-        this.balance = this.updateBalance();
-        this.currency = JSON.parse(localStorage.getItem('appData')) ?
-            JSON.parse(localStorage.getItem('appData')).currency :
-            'BYN'
+                    ]
+                }
+            ];
+        this.incomesForShow = null;
+        this.outlaysForShow = null;
+        this.balance = 0;
+        this.currency = 'BYN'
         this.dateForShow = 'all';
     }
-    setStorage(){
+    loadData(){
+        const appData = JSON.parse(localStorage.getItem('appData'));
+        if(appData){
+            this.outlays = appData.outlays;
+            this.incomes = appData.incomes;
+            this.currency = appData.currency;
+        }
+    }
+    setData(){
         const dataObj = {
             outlays: this.outlays,
             incomes: this.incomes,
@@ -66,8 +70,13 @@ class App{
         }
         localStorage.setItem('appData', JSON.stringify(dataObj))
     }
+    init(){
+        this.loadData();
+        this.filterDateAndDeleteUnused();
+        this.updateBalance();
+    }
     updateBalance(){
-        return this.balance = this.incomesForShow.reduce(
+        this.balance = this.incomesForShow.reduce(
             (sum, income) => sum += income.subitems.reduce(
                 (itemsSum, item) => itemsSum += +item.cost, 0
             ), 0
@@ -83,16 +92,19 @@ class App{
         return this.balance;
     }
     getIncomes(){
-        return this.incomesForShow;
+        return this.incomes;
     }
     getOutlays(){
+        return this.outlays;
+    }
+    getIncomesForShow(){
+        return this.incomesForShow;
+    }
+    getOutlaysForShow(){
         return this.outlaysForShow;
     }
-    updateOutlays(){
-        this.outlaysForShow = this.outlays;
-    }
-    updateIncomes(){
-        this.incomesForShow = this.incomes;
+    getCurrency(){
+        return this.currency;
     }
     setNewIncome(category, name, cost, date){
         const categoryObject = this.incomes.filter(
@@ -105,10 +117,9 @@ class App{
                 date
             }
         )
-        this.sortItemsByDate()
-        this.updateIncomes()
+        this.filterDateAndDeleteUnused()
         this.updateBalance()
-        this.setStorage()
+        this.setData()
     }
     setNewOutlay(category, name, cost, date){
         const categoryObject = this.outlays.filter(
@@ -121,13 +132,10 @@ class App{
                 date
             }
         )
-        this.sortItemsByDate()
-        this.updateIncomes()
+        // this.updateIncomes()
+        this.filterDateAndDeleteUnused()
         this.updateBalance()
-        this.setStorage()
-    }
-    getCurrency(){
-        return this.currency;
+        this.setData()
     }
     setNewOutlayCategory(name){
         this.outlays.push({
@@ -158,9 +166,11 @@ class App{
     }
     setDate(date){
         this.dateForShow = date;
-        this.sortItemsByDate()
+        this.filterDateAndDeleteUnused();
+        this.updateBalance()
     }
-    sortItemsByDate(){
+    filterDateAndDeleteUnused(){
+        // Filtering outlays and incomes by date
         this.outlaysForShow =
         this.outlays.map(
             category => {
@@ -190,7 +200,14 @@ class App{
                     }
                 }  
             )
-        this.updateBalance()
+
+        // Deleting categories with no items
+        this.outlaysForShow = this.outlaysForShow.filter(
+            category => !!category.subitems.length
+        )
+        this.incomesForShow = this.incomesForShow.filter(
+            category => !!category.subitems.length
+        )
     }
     getDate(){
         return this.dateForShow;

@@ -1,6 +1,7 @@
 import App from './app.js';
 
 const app = new App();
+app.init();
 
 const balance = document.getElementById('balance');
 const outlaysCategories = document.getElementById('outlaysCategories');
@@ -15,7 +16,7 @@ const currentCurency = app.getCurrency();
 
 const fillIncomesCategories = () => {
     incomesCategories.innerHTML = '';
-    const incomes = app.getIncomes();
+    const incomes = app.getIncomesForShow();
     incomes.forEach(
         category => {
             const li = document.createElement('li');
@@ -43,7 +44,7 @@ const fillIncomesCategories = () => {
 
 const fillOutlaysCategories = () => {
     outlaysCategories.innerHTML = '';
-    const outlays = app.getOutlays();
+    const outlays = app.getOutlaysForShow();
     outlays.forEach(
         category => {
             const li = document.createElement('li');
