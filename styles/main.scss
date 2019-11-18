@@ -6,9 +6,12 @@ form.modal{
 }
 
 ul{
-    li{
-        &.hide{
+    li.category{
+        ul li{
             display: none;
+            &.show{
+                display: block;
+            }
         }
     }
 }

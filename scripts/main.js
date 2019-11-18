@@ -33,7 +33,8 @@ const fillIncomesCategories = () => {
     incomes.forEach(
         category => {
             const li = document.createElement('li');
-            li.innerHTML = category.name
+            let sum = 0;
+            li.classList.add('category')
             if(!!category.subitems.length){
                 const ul = document.createElement('ul');
                 category.subitems.forEach(
@@ -52,13 +53,15 @@ const fillIncomesCategories = () => {
                          li.appendChild(name);
                          li.appendChild(cost);
                          li.appendChild(date);
-                         ul.appendChild(li)
+                         ul.appendChild(li);
+                         sum += +item.cost;
                     }
                 )
+                li.innerHTML = `${category.name} - ${sum} ${currentCurency}`;
                 li.appendChild(ul);
                 li.onclick = () => {
                     [...li.lastElementChild.children].forEach(
-                        el => el.classList.toggle('hide')
+                        el => el.classList.toggle('show')
                     )
                 }
             }
@@ -73,6 +76,7 @@ const fillOutlaysCategories = () => {
     outlays.forEach(
         category => {
             const li = document.createElement('li');
+            li.classList.add('category')
             li.innerHTML = category.name
             if(!!category.subitems.length){
                 const ul = document.createElement('ul');
@@ -98,7 +102,7 @@ const fillOutlaysCategories = () => {
                 li.appendChild(ul);
                 li.onclick = () => {
                     [...li.lastElementChild.children].forEach(
-                        el => el.classList.toggle('hide')
+                        el => el.classList.toggle('show')
                     )
                 }
             }

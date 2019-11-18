@@ -6,7 +6,11 @@ form.modal.show {
   display: block;
 }
 
-ul li.hide {
+ul li.category ul li {
   display: none;
+}
+
+ul li.category ul li.show {
+  display: block;
 }
 /*# sourceMappingURL=main.css.map */
