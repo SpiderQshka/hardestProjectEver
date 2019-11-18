@@ -19,6 +19,10 @@ const addNewIncomeCategoryInput = document.getElementById('addNewIncomeCategoryI
 const addNewOutlayCategoryInput = document.getElementById('addNewOutlayCategoryInput');
 const addNewIncomeCategoryBtn = document.getElementById('addNewIncomeCategoryBtn');
 const addNewOutlayCategoryBtn = document.getElementById('addNewOutlayCategoryBtn');
+const cancelNewOutlaySubmitBtn = document.getElementById('cancelNewOutlaySubmitBtn');
+const cancelNewIncomeSubmitBtn = document.getElementById('cancelNewIncomeSubmitBtn');
+const addNewCategories = document.getElementById('addNewCategories');
+const newCategoriesBtns = document.getElementById('newCategoriesBtns');
 const dateCheckboxInputs = [...document.querySelectorAll('#dateList .form-check-input')];
 
 dateForm.onchange = e => {
@@ -202,7 +206,6 @@ addNewIncomeForm.addEventListener('submit', e => {
         elements.costInput.value,
         elements.nameInput.value,
         elements.colorInput.value];
-    console.log(date, category, cost, name, color)
     if(!(date && category && cost && name && color)){
         alert('All field should be filled')
     } else {
@@ -240,7 +243,7 @@ addNewIncomeBtn.onclick = () => {
     addNewIncomeForm.classList.add('show')
 }
 
-addNewIncomeBtn.ondblclick = () => {
+cancelNewIncomeSubmitBtn.onclick = () => {
     addNewIncomeForm.classList.remove('show')
 }
 
@@ -248,7 +251,7 @@ addNewOutlayBtn.onclick = () => {
     addNewOutlayForm.classList.add('show')
 }
 
-addNewOutlayBtn.ondblclick = () => {
+cancelNewOutlaySubmitBtn.onclick = () => {
     addNewOutlayForm.classList.remove('show')
 }
 
@@ -264,4 +267,8 @@ addNewOutlayCategoryBtn.onclick = () => {
     const v = addNewOutlayCategoryInput.value;
     app.setNewOutlayCategory(v);
     updateAll()
+}
+
+addNewCategories.onclick = () => {
+    newCategoriesBtns.classList.toggle('hide')
 }

@@ -1,10 +1,24 @@
-@media all and (max-width: 600px) {
+@media all and (max-width: 700px) {
   #main-container {
+    max-width: calc(100% - 20px);
         grid-template-areas: 'header' 'main' 'aside' 'footer';
-    -ms-grid-rows: 100px 1fr 1fr 100px;
-        grid-template-rows: 100px 1fr 1fr 100px;
+    -ms-grid-rows: minmax(100px, auto) auto auto auto;
+        grid-template-rows: minmax(100px, auto) auto auto auto;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+  #main-container #addNewIncomesOutlaysBtns {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 /*# sourceMappingURL=media.css.map */

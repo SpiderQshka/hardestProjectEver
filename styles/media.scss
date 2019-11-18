@@ -1,11 +1,18 @@
-@media all and (max-width: 600px){
+@media all and (max-width: 700px){
     #main-container{
+        max-width: calc(100% - 20px);
         grid-template-areas:
             'header'
             'main'
             'aside'
             'footer';
-        grid-template-rows: 100px 1fr 1fr 100px;
+        grid-template-rows: minmax(100px, auto) auto auto auto;
         grid-template-columns: 1fr;
+        row-gap: 20px;
+        #addNewIncomesOutlaysBtns{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     }
 }

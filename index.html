@@ -11,17 +11,17 @@
   <body>
     <div id='main-container'>
       <header>
-        <h1 class="text-center">Your Money Manager</h1>
+        <h1 class="text-center text-primary pt-4">Your Money Manager</h1>
       </header>
       <main>
-        <div><h2 class="text-center">Balance: <span id="balance">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
+        <div><h2 class="text-center pb-2">Balance: <span id="balance" class="text-primary">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
         <div id="outlays">
-          <h2 class="text-center p-2">Outlays</h2>
+          <h2 class="text-center p-2 text-danger">Outlays</h2>
           <ul id="outlaysCategories" class="list-unstyled list-group">
           </ul>
         </div>
         <div id="incomes">
-          <h2 class="text-center p-2">Incomes</h2>
+          <h2 class="text-center p-2 text-success">Incomes</h2>
           <ul id="incomesCategories" class="list-unstyled list-group">
           </ul>
         </div>
@@ -57,73 +57,73 @@
           </li>
         </ul>
         </form>
-        <div id="settings">
-            <h2 class="text-center py-2">Settings</h2>
-            <div id="newCategoriesBtns">
-              <label>
-                <h4 class="text-center">Income</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="Name"> 
-                <button id='addNewIncomeCategoryBtn' class="btn btn-light btn-block">Add income category</button>
-              </label>
-              <label>
-                <h4 class="text-center">Outlay</h4><input type="text" class="form-control mb-2" id='addNewOutlayCategoryInput' placeholder="Name"> 
-                <button id='addNewOutlayCategoryBtn' class="btn btn-light btn-block">Add outlay category</button>
-              </label>
-            </div>
-            
+        <div id="addNewCategories">
+          <h3 class="text-center pt-4 pb-2">Add new category</h3>
+          <div id="newCategoriesBtns">
+            <label class="d-block">
+              <h4 class="text-center">Income</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="New income category name"> 
+              <button id='addNewIncomeCategoryBtn' class="btn btn-primary btn-block">Add income category</button>
+            </label>
+            <label class="d-block">
+              <h4 class="text-center">Outlay</h4><input type="text" class="form-control mb-2" id='addNewOutlayCategoryInput' placeholder="New outlay category name"> 
+              <button id='addNewOutlayCategoryBtn' class="btn btn-primary btn-block">Add outlay category</button>
+            </label>
+          </div>
         </div>
       </aside>
       <footer class="d-flex justify-content-center p-4">
         <div id="addNewIncomesOutlaysBtns">
-          <button id='addNewIncomeBtn' class="btn btn-success btn-lg">Add new income</button>
-          <button id='addNewOutlayBtn' class="btn btn-danger btn-lg">Add new outlay</button>
+          <button id='addNewIncomeBtn' class="btn btn-success btn-lg mb-2">Add new income</button>
+          <button id='addNewOutlayBtn' class="btn btn-danger btn-lg mb-2">Add new outlay</button>
         </div>
       </footer>
     </div>
-      <form id="addNewIncome" class="modal-form">
-        <div class="modal-form-container">
-          <div class="form-row m-0">
-            <h2 class="col-12 text-center">Add new income</h2>
+    <form id="addNewIncome" class="modal-form">
+      <div class="modal-form-container alert bg-light">
+        <div class="form-row m-0">
+          <h2 class="col-12 text-center py-4">Add new income</h2>
+        </div>
+        <div class="form-row m-0 justify-content-center">
+          <div class="form-group m-1">
+            <label name='name'>Name: <input type="text" name='nameInput' class="form-control"></label>
           </div>
-          <div class="form-row m-0 justify-content-center">
-            <div class="form-group m-1">
-              <label name='name'>Name: <input type="text" name='nameInput' class="form-control"></label>
-            </div>
-            <div class="form-group m-1">
-              <label name='date'>Date: <input type="date" name='dateInput' class="form-control"></label>
-            </div>
-            <div class="form-group m-1">
-              <label name='category'>Category: <select name="categoryInput" id='incomeCategoryInput' class="form-control"></select>
-              </select></label>
-            </div>
-            <div class="form-group m-1">
-              <label name='color'>Label color: <input type="color" name="colorInput" class="form-control"></label>
-            </div>
+          <div class="form-group m-1">
+            <label name='date'>Date: <input type="date" name='dateInput' class="form-control"></label>
           </div>
-          <div class="form-row m-0 justify-content-center">
-            <div class="form-group m-1">
-              <div class="input-group">
-                <input type="number" min='1' name="costInput" class="form-control">
-                <div class="input-group-append">
-                  <span class="input-group-text" id="currency">BYN</span>
-                </div>
-              </div>  
-            </div>
+          <div class="form-group m-1">
+            <label name='category'>Category: <select name="categoryInput" id='incomeCategoryInput' class="form-control"></select>
+            </select></label>
           </div>
-            
-          <div class="form-row m-0 justify-content-center">
-            <div class="form-group">
-              <button type="submit" class="btn btn-light btn-lg">Yep!</button>
-            </div>
+          <div class="form-group m-1">
+            <label name='color'>Label color: <input type="color" name="colorInput" class="form-control"></label>
           </div>
         </div>
-        
-        
-      </form>
+        <div class="form-row m-0 justify-content-center">
+          <div class="form-group m-1">
+            <div class="input-group">
+              <input type="number" min='1' name="costInput" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text" id="currency">BYN</span>
+              </div>
+            </div>  
+          </div>
+        </div>
+          
+        <div class="form-row my-3 justify-content-center">
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg">Yep!</button>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewIncomeSubmitBtn'>Nope!</button>
+          </div>
+        </div>
+      </div>
+    </form>
       
       <form id="addNewOutlay" class="modal-form">
-        <div class="modal-form-container">
+        <div class="modal-form-container alert bg-light">
           <div class="form-row m-0">
-            <h2 class="col-12 text-center">Add new outlay</h2>
+            <h2 class="col-12 text-center py-4">Add new outlay</h2>
           </div>
           <div class="form-row m-0 justify-content-center">
             <div class="form-group m-1">
@@ -151,15 +151,16 @@
             </div>
           </div>
             
-          <div class="form-row m-0 justify-content-center">
+          <div class="form-row my-3 justify-content-center">
             <div class="form-group">
-              <button type="submit" class="btn btn-light btn-lg">Yep!</button>
+              <button type="submit" class="btn btn-success btn-lg">Yep!</button>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewOutlaySubmitBtn'>Nope!</button>
             </div>
           </div>
         </div>
-          
-          
-        </form>
+      </form>
     <script type="module" src="./scripts/main.js"></script>
   </body>
 </html>
