@@ -9,93 +9,93 @@
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-    <div id='main-container'>
+    <div id='main-container' class="shadow-lg p-4 rounded my-4">
       <header>
-        <h1 class="text-center text-primary pt-4">Your Money Manager</h1>
+        <h1 class="text-center pt-2">Менеджер финансов</h1>
       </header>
       <main>
-        <div><h2 class="text-center pb-2">Balance: <span id="balance" class="text-primary">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
+        <div><h2 class="text-center pb-2">Баланс: <span id="balance">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
         <div id="outlays">
-          <h2 class="text-center p-2 text-danger">Outlays</h2>
+          <h2 class="text-center p-2 text-danger">Расходы</h2>
           <ul id="outlaysCategories" class="list-unstyled list-group">
           </ul>
         </div>
         <div id="incomes">
-          <h2 class="text-center p-2 text-success">Incomes</h2>
+          <h2 class="text-center p-2 text-success">Доходы</h2>
           <ul id="incomesCategories" class="list-unstyled list-group">
           </ul>
         </div>
       </main>
       <aside>
-        <h2 class="text-center">Date</h2>
+        <h2 class="text-center" id='dateFormHeader'>Дата</h2>
         <form name='dateForm' id='dateForm'>
         <ul id="dateList" class="list-unstyled list-group" role='group'>
           <li class="list-group-item p-0">
             <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='day' name="dateInput" id="" autocomplete="off">Day
+              <input class="form-check-input sr-only" type="radio" value='day' name="dateInput" id="" autocomplete="off">День
             </label>
           </li>
           <li class="list-group-item p-0">            
             <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='week' name="dateInput" id="" autocomplete="off">Week
+              <input class="form-check-input sr-only" type="radio" value='week' name="dateInput" id="" autocomplete="off">Неделя
             </label>
           </li>
           <li class="list-group-item p-0">            
             <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='month' name="dateInput" id="" autocomplete="off">Month
+              <input class="form-check-input sr-only" type="radio" value='month' name="dateInput" id="" autocomplete="off">Месяц
             </label> 
           </li>
           <li class="list-group-item p-0">            
             <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='year' name="dateInput" id="" autocomplete="off">Year
+              <input class="form-check-input sr-only" type="radio" value='year' name="dateInput" id="" autocomplete="off">Год
             </label>
           </li>
           <li class="list-group-item p-0 active">            
             <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='all' name="dateInput" id="" autocomplete="off" checked>All
+              <input class="form-check-input sr-only" type="radio" value='all' name="dateInput" id="" autocomplete="off" checked>Все
             </label>
           </li>
         </ul>
         </form>
         <div id="addNewCategories">
-          <h3 class="text-center pt-4 pb-2">Add new category</h3>
-          <div id="newCategoriesBtns">
+          <h3 class="text-center pt-4 pb-2 text-primary" id='addNewCategoriesHeader'>Добавить новую категорию</h3>
+          <div id="newCategoriesBtns" class="hide">
             <label class="d-block">
-              <h4 class="text-center">Income</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="New income category name"> 
-              <button id='addNewIncomeCategoryBtn' class="btn btn-primary btn-block">Add income category</button>
+              <h4 class="text-center">Доход</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="Введите название категории"> 
+              <button id='addNewIncomeCategoryBtn' class="btn btn-primary btn-block">Добавить</button>
             </label>
             <label class="d-block">
-              <h4 class="text-center">Outlay</h4><input type="text" class="form-control mb-2" id='addNewOutlayCategoryInput' placeholder="New outlay category name"> 
-              <button id='addNewOutlayCategoryBtn' class="btn btn-primary btn-block">Add outlay category</button>
+              <h4 class="text-center">Расход</h4><input type="text" class="form-control mb-2" id='addNewOutlayCategoryInput' placeholder="Введите название категории"> 
+              <button id='addNewOutlayCategoryBtn' class="btn btn-primary btn-block">Добавить</button>
             </label>
           </div>
         </div>
       </aside>
       <footer class="d-flex justify-content-center p-4">
         <div id="addNewIncomesOutlaysBtns">
-          <button id='addNewIncomeBtn' class="btn btn-success btn-lg mb-2">Add new income</button>
-          <button id='addNewOutlayBtn' class="btn btn-danger btn-lg mb-2">Add new outlay</button>
+          <button id='addNewIncomeBtn' class="btn btn-success btn-lg mb-2">Добавить новый доход</button>
+          <button id='addNewOutlayBtn' class="btn btn-danger btn-lg mb-2">Добавить новый расход</button>
         </div>
       </footer>
     </div>
     <form id="addNewIncome" class="modal-form">
-      <div class="modal-form-container alert bg-light">
+      <div class="modal-form-content alert bg-light">
         <div class="form-row m-0">
-          <h2 class="col-12 text-center py-4">Add new income</h2>
+          <h2 class="col-12 text-center py-4">Добавить новый доход</h2>
         </div>
         <div class="form-row m-0 justify-content-center">
           <div class="form-group m-1">
-            <label name='name'>Name: <input type="text" name='nameInput' class="form-control"></label>
+            <label name='name'>Название<input type="text" name='nameInput' class="form-control"></label>
           </div>
           <div class="form-group m-1">
-            <label name='date'>Date: <input type="date" name='dateInput' class="form-control"></label>
+            <label name='date'>Дата<input type="date" name='dateInput' class="form-control"></label>
           </div>
           <div class="form-group m-1">
-            <label name='category'>Category: <select name="categoryInput" id='incomeCategoryInput' class="form-control"></select>
+            <label name='category'>Категория<select name="categoryInput" id='incomeCategoryInput' class="form-control"></select>
             </select></label>
           </div>
           <div class="form-group m-1">
-            <label name='color'>Label color: <input type="color" name="colorInput" class="form-control"></label>
+            <label name='color'>Цвет лейбла<input type="color" name="colorInput" class="form-control"></label>
           </div>
         </div>
         <div class="form-row m-0 justify-content-center">
@@ -111,33 +111,33 @@
           
         <div class="form-row my-3 justify-content-center">
           <div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg">Yep!</button>
+            <button type="submit" class="btn btn-success btn-lg">Добавить</button>
           </div>
           <div class="form-group">
-            <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewIncomeSubmitBtn'>Nope!</button>
+            <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewIncomeSubmitBtn'>Отменить</button>
           </div>
         </div>
       </div>
     </form>
       
       <form id="addNewOutlay" class="modal-form">
-        <div class="modal-form-container alert bg-light">
+        <div class="modal-form-content alert bg-light">
           <div class="form-row m-0">
-            <h2 class="col-12 text-center py-4">Add new outlay</h2>
+            <h2 class="col-12 text-center py-4">Добавить новый расход</h2>
           </div>
           <div class="form-row m-0 justify-content-center">
             <div class="form-group m-1">
-              <label name='name'>Name: <input type="text" name='nameInput' class="form-control"></label>
+              <label name='name'>Название<input type="text" name='nameInput' class="form-control"></label>
             </div>
             <div class="form-group m-1">
-              <label name='date'>Date: <input type="date" name='dateInput' class="form-control"></label>
+              <label name='date'>Дата<input type="date" name='dateInput' class="form-control"></label>
             </div>
             <div class="form-group m-1">
-              <label name='category'>Category: <select name="categoryInput" id='outlayCategoryInput' class="form-control"></select>
+              <label name='category'>Категория<select name="categoryInput" id='outlayCategoryInput' class="form-control"></select>
               </select></label>
             </div>
             <div class="form-group m-1">
-              <label name='color'>Label color: <input type="color" name="colorInput" class="form-control"></label>
+              <label name='color'>Цвет лейбла<input type="color" name="colorInput" class="form-control"></label>
             </div>
           </div>
           <div class="form-row m-0 justify-content-center">
@@ -153,10 +153,10 @@
             
           <div class="form-row my-3 justify-content-center">
             <div class="form-group">
-              <button type="submit" class="btn btn-success btn-lg">Yep!</button>
+              <button type="submit" class="btn btn-success btn-lg">Добавить</button>
             </div>
             <div class="form-group">
-              <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewOutlaySubmitBtn'>Nope!</button>
+              <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewOutlaySubmitBtn'>Отменить</button>
             </div>
           </div>
         </div>

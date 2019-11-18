@@ -9,9 +9,11 @@ form.modal-form {
   height: 100%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
+  -webkit-transition: .7s;
+  transition: .7s;
 }
 
-form.modal-form .modal-form-container {
+form.modal-form .modal-form-content {
   display: inline-block;
   max-width: calc(100vw - 40px);
 }
@@ -30,6 +32,12 @@ ul li.category ul li {
 
 ul li.category ul li.show {
   display: block;
+}
+
+.delete-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 #main-container {

@@ -3,37 +3,37 @@ class App{
         this.outlays = 
             [
                 {
-                    name: 'Food',
+                    name: 'Еда',
                     subitems: [
 
                     ]
                 },
                 {
-                    name: 'Health',
+                    name: 'Здоровье',
                     subitems: [
                         
                     ]
                 },
                 {
-                    name: 'Transport',
+                    name: 'Транспорт',
                     subitems: [
                         
                     ]
                 },
                 {
-                    name: 'Clothes',
+                    name: 'Одежда',
                     subitems: [
                         
                     ]
                 },
                 {
-                    name: 'House',
+                    name: 'Дом',
                     subitems: [
                         
                     ]
                 },
                 {
-                    name: 'Sport',
+                    name: 'Спорт',
                     subitems: [
                         
                     ]
@@ -42,7 +42,7 @@ class App{
         this.incomes = 
             [
                 {
-                    name: 'Salary',
+                    name: 'Зарплата',
                     subitems: [
 
                     ]
@@ -116,6 +116,42 @@ class App{
                 cost,
                 date,
                 color
+            }
+        )
+        this.filterDateAndDeleteUnused()
+        this.updateBalance()
+        this.setData()
+    }
+    deleteOutlay(categoryName, itemName){
+        this.outlays.forEach(
+            category => {
+                if(category.name === categoryName){
+                    category.subitems.forEach(
+                        (item, i) => {
+                            if(item.name === itemName){
+                                category.subitems.splice(i, 1);
+                            }
+                        }
+                    )
+                }
+            }
+        )
+        this.filterDateAndDeleteUnused()
+        this.updateBalance()
+        this.setData()
+    }
+    deleteIncome(categoryName, itemName){
+        this.incomes.forEach(
+            category => {
+                if(category.name === categoryName){
+                    category.subitems.forEach(
+                        (item, i) => {
+                            if(item.name === itemName){
+                                category.subitems.splice(i, 1);
+                            }
+                        }
+                    )
+                }
             }
         )
         this.filterDateAndDeleteUnused()

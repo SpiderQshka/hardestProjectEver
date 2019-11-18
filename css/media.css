@@ -1,6 +1,11 @@
-@media all and (max-width: 700px) {
+@media all and (max-width: 850px) {
   #main-container {
-    max-width: calc(100% - 20px);
+    max-width: calc(100% - 30px);
+  }
+}
+
+@media all and (max-width: 650px) {
+  #main-container {
         grid-template-areas: 'header' 'main' 'aside' 'footer';
     -ms-grid-rows: minmax(100px, auto) auto auto auto;
         grid-template-rows: minmax(100px, auto) auto auto auto;
