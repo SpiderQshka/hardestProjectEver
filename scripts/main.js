@@ -11,6 +11,8 @@ const incomeCategoryInput = document.getElementById('incomeCategoryInput');
 const dateForm = document.getElementById('dateForm');
 const addNewIncomeForm = document.getElementById('addNewIncome');
 const addNewOutlayForm = document.getElementById('addNewOutlay');
+const addNewIncomeFormDateInput = addNewIncomeForm.elements.dateInput;
+const addNewOutlayFormDateInput = addNewOutlayForm.elements.dateInput;
 const addNewIncomeBtn = document.getElementById('addNewIncomeBtn');
 const addNewOutlayBtn = document.getElementById('addNewOutlayBtn');
 const addNewIncomeCategoryInput = document.getElementById('addNewIncomeCategoryInput');
@@ -19,6 +21,11 @@ const addNewIncomeCategoryBtn = document.getElementById('addNewIncomeCategoryBtn
 const addNewOutlayCategoryBtn = document.getElementById('addNewOutlayCategoryBtn');
 
 const currentCurency = app.getCurrency();
+const currentDate = new Date();
+const currentDateInFormat = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+
+addNewIncomeFormDateInput.value = currentDateInFormat;
+addNewOutlayFormDateInput.value = currentDateInFormat;
 
 const fillIncomesCategories = () => {
     incomesCategories.innerHTML = '';
@@ -49,6 +56,11 @@ const fillIncomesCategories = () => {
                     }
                 )
                 li.appendChild(ul);
+                li.onclick = () => {
+                    [...li.lastElementChild.children].forEach(
+                        el => el.classList.toggle('hide')
+                    )
+                }
             }
             incomesCategories.appendChild(li);
         }
@@ -84,6 +96,11 @@ const fillOutlaysCategories = () => {
                     }
                 )
                 li.appendChild(ul);
+                li.onclick = () => {
+                    [...li.lastElementChild.children].forEach(
+                        el => el.classList.toggle('hide')
+                    )
+                }
             }
             outlaysCategories.appendChild(li);
         }

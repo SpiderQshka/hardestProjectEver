@@ -5,4 +5,8 @@ form.modal {
 form.modal.show {
   display: block;
 }
+
+ul li.hide {
+  display: none;
+}
 /*# sourceMappingURL=main.css.map */
