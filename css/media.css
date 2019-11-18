@@ -1,0 +1,10 @@
+@media all and (max-width: 600px) {
+  #main-container {
+        grid-template-areas: 'header' 'main' 'aside' 'footer';
+    -ms-grid-rows: 100px 1fr 1fr 100px;
+        grid-template-rows: 100px 1fr 1fr 100px;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+/*# sourceMappingURL=media.css.map */

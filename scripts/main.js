@@ -19,6 +19,18 @@ const addNewIncomeCategoryInput = document.getElementById('addNewIncomeCategoryI
 const addNewOutlayCategoryInput = document.getElementById('addNewOutlayCategoryInput');
 const addNewIncomeCategoryBtn = document.getElementById('addNewIncomeCategoryBtn');
 const addNewOutlayCategoryBtn = document.getElementById('addNewOutlayCategoryBtn');
+const dateCheckboxInputs = [...document.querySelectorAll('#dateList .form-check-input')];
+
+dateForm.onchange = e => {
+    dateCheckboxInputs.forEach(
+        input => {
+            const liParent = input.parentNode.parentNode;
+            input.checked ? 
+                liParent.classList.add('active') : 
+                liParent.classList.remove('active')
+        }
+    )
+}
 
 const currentCurency = app.getCurrency();
 const currentDate = new Date();
@@ -34,30 +46,36 @@ const fillIncomesCategories = () => {
         category => {
             const li = document.createElement('li');
             let sum = 0;
-            li.classList.add('category')
+            li.classList.add('category', 'list-group-item')
             if(!!category.subitems.length){
                 const ul = document.createElement('ul');
+                ul.classList.add('list-group');
                 category.subitems.forEach(
                     item => {
                          const li = document.createElement('li');
                          const name = document.createElement('span');
                          const cost = document.createElement('span');
                          const date = document.createElement('span');
-                         name.classList.add('name');
-                         name.style.color = item.color;
+                         name.classList.add('name', 'badge', 'p-2');
+                         name.style.backgroundColor = item.color;
+                         name.style.color = 'white'
                          cost.classList.add('cost');
                          date.classList.add('date')
                          name.innerHTML = item.name;
-                         cost.innerHTML = `, cost: ${item.cost} ${currentCurency}. `;
+                         cost.innerHTML = ` ${item.cost} ${currentCurency}. `;
                          date.innerHTML = `Date: ${item.date}`;
                          li.appendChild(name);
                          li.appendChild(cost);
                          li.appendChild(date);
+                         li.classList.add('list-group-item')
                          ul.appendChild(li);
                          sum += +item.cost;
                     }
                 )
-                li.innerHTML = `${category.name} - ${sum} ${currentCurency}`;
+                const p = document.createElement('p');
+                p.innerHTML = `${category.name} - ${sum} ${currentCurency}`;
+                p.classList.add('mb-0', 'p-2')
+                li.prepend(p)
                 li.appendChild(ul);
                 li.onclick = () => {
                     [...li.lastElementChild.children].forEach(
@@ -68,6 +86,12 @@ const fillIncomesCategories = () => {
             incomesCategories.appendChild(li);
         }
     )
+    if(!incomes.length){
+        const infoText = document.createElement('p');
+        infoText.classList.add('text-center')
+        infoText.innerHTML = "Wow, looks like you don't have any incomes. It's time to change it!"
+        incomesCategories.appendChild(infoText)
+    }
 }
 
 const fillOutlaysCategories = () => {
@@ -76,29 +100,37 @@ const fillOutlaysCategories = () => {
     outlays.forEach(
         category => {
             const li = document.createElement('li');
-            li.classList.add('category')
-            li.innerHTML = category.name
+            let sum = 0;
+            li.classList.add('category', 'list-group-item')
             if(!!category.subitems.length){
                 const ul = document.createElement('ul');
+                ul.classList.add('list-group');
                 category.subitems.forEach(
                     item => {
                          const li = document.createElement('li');
                          const name = document.createElement('span');
                          const cost = document.createElement('span');
                          const date = document.createElement('span');
-                         name.classList.add('name');
-                         name.style.color = item.color;
+                         name.classList.add('name', 'badge', 'p-2');
+                         name.style.backgroundColor = item.color;
+                         name.style.color = 'white'
                          cost.classList.add('cost');
-                         date.classList.add('date');
+                         date.classList.add('date')
                          name.innerHTML = item.name;
-                         cost.innerHTML = `, cost: ${item.cost} ${currentCurency}. `;
+                         cost.innerHTML = ` ${item.cost} ${currentCurency}. `;
                          date.innerHTML = `Date: ${item.date}`;
                          li.appendChild(name);
                          li.appendChild(cost);
                          li.appendChild(date);
-                         ul.appendChild(li)
+                         li.classList.add('list-group-item')
+                         ul.appendChild(li);
+                         sum += +item.cost;
                     }
                 )
+                const p = document.createElement('p');
+                p.innerHTML = `${category.name} - ${sum} ${currentCurency}`;
+                p.classList.add('mb-0', 'p-2')
+                li.prepend(p)
                 li.appendChild(ul);
                 li.onclick = () => {
                     [...li.lastElementChild.children].forEach(
@@ -109,6 +141,12 @@ const fillOutlaysCategories = () => {
             outlaysCategories.appendChild(li);
         }
     )
+    if(!outlays.length){
+        const infoText = document.createElement('p');
+        infoText.classList.add('text-center')
+        infoText.innerHTML = "Wow, looks like you don't have any outlays. Fine!"
+        outlaysCategories.appendChild(infoText)
+    }
 }
 
 const fillOutlaysCategoryInput = () => {
@@ -164,6 +202,7 @@ addNewIncomeForm.addEventListener('submit', e => {
         elements.costInput.value,
         elements.nameInput.value,
         elements.colorInput.value];
+    console.log(date, category, cost, name, color)
     if(!(date && category && cost && name && color)){
         alert('All field should be filled')
     } else {
@@ -188,7 +227,7 @@ addNewOutlayForm.addEventListener('submit', e => {
     } else {
         app.setNewOutlay(category, name, cost, date, color)
         updateAll()
-        addNewIncomeForm.classList.remove('show')
+        addNewOutlayForm.classList.remove('show')
     }
 })
 
@@ -215,7 +254,9 @@ addNewOutlayBtn.ondblclick = () => {
 
 addNewIncomeCategoryBtn.onclick = () => {
     const v = addNewIncomeCategoryInput.value;
+    console.log(v)
     app.setNewIncomeCategory(v);
+    console.log(app.getIncomes())
     updateAll()
 }
 

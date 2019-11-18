@@ -5,104 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Money Manager</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
-    <div>
+    <div id='main-container'>
       <header>
-        <h1>Your Money Manager</h1>
+        <h1 class="text-center">Your Money Manager</h1>
       </header>
       <main>
-        <div><p>Balance: <span id="balance">100</span> <span class="currency">BYN</span></p></div>
+        <div><h2 class="text-center">Balance: <span id="balance">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
         <div id="outlays">
-          <h2>Outlays</h2>
-          <ul id="outlaysCategories">
+          <h2 class="text-center p-2">Outlays</h2>
+          <ul id="outlaysCategories" class="list-unstyled list-group">
           </ul>
         </div>
         <div id="incomes">
-          <h2>Incomes</h2>
-          <ul id="incomesCategories">
+          <h2 class="text-center p-2">Incomes</h2>
+          <ul id="incomesCategories" class="list-unstyled list-group">
           </ul>
         </div>
       </main>
       <aside>
-        <div id="date">
-          <h2>Date</h2>
-        </div>
+        <h2 class="text-center">Date</h2>
         <form name='dateForm' id='dateForm'>
-        <ul id="dateList" class="btn-group" data-toggle="buttons">
-          <li>
-            <label class="btn btn-light active">
-              <input type="radio" value='day' name="dateInput" id="" autocomplete="off">Day
+        <ul id="dateList" class="list-unstyled list-group" role='group'>
+          <li class="list-group-item p-0">
+            <label class="form-check-label px-4 py-3 d-block text-center">
+              <input class="form-check-input sr-only" type="radio" value='day' name="dateInput" id="" autocomplete="off">Day
             </label>
           </li>
-          <li>            
-            <label class="btn btn-light">
-              <input type="radio" value='week' name="dateInput" id="" autocomplete="off">Week
+          <li class="list-group-item p-0">            
+            <label class="form-check-label px-4 py-3 d-block text-center">
+              <input class="form-check-input sr-only" type="radio" value='week' name="dateInput" id="" autocomplete="off">Week
             </label>
           </li>
-          <li>            
-            <label class="btn btn-light">
-              <input type="radio" value='month' name="dateInput" id="" autocomplete="off">Month
+          <li class="list-group-item p-0">            
+            <label class="form-check-label px-4 py-3 d-block text-center">
+              <input class="form-check-input sr-only" type="radio" value='month' name="dateInput" id="" autocomplete="off">Month
             </label> 
           </li>
-          <li>            
-            <label class="btn btn-light">
-              <input type="radio" value='year' name="dateInput" id="" autocomplete="off">Year
+          <li class="list-group-item p-0">            
+            <label class="form-check-label px-4 py-3 d-block text-center">
+              <input class="form-check-input sr-only" type="radio" value='year' name="dateInput" id="" autocomplete="off">Year
             </label>
           </li>
-          <li>            
-            <label class="btn btn-light">
-              <input type="radio" value='all' name="dateInput" id="" autocomplete="off" checked>All
+          <li class="list-group-item p-0 active">            
+            <label class="form-check-label px-4 py-3 d-block text-center">
+              <input class="form-check-input sr-only" type="radio" value='all' name="dateInput" id="" autocomplete="off" checked>All
             </label>
           </li>
         </ul>
         </form>
         <div id="settings">
-            <h2>Settings</h2>
-            <label>
-              Category name: <input type="text" id='addNewIncomeCategoryInput'> 
-              <button id='addNewIncomeCategoryBtn'>Add new income category</button>
-            </label>
-            <br>
-            <label>
-              Category name: <input type="text" id='addNewOutlayCategoryInput'> 
-              <button id='addNewOutlayCategoryBtn'>Add new outlay category</button>
-            </label>
+            <h2 class="text-center py-2">Settings</h2>
+            <div id="newCategoriesBtns">
+              <label>
+                <h4 class="text-center">Income</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="Name"> 
+                <button id='addNewIncomeCategoryBtn' class="btn btn-light btn-block">Add income category</button>
+              </label>
+              <label>
+                <h4 class="text-center">Outlay</h4><input type="text" class="form-control mb-2" id='addNewOutlayCategoryInput' placeholder="Name"> 
+                <button id='addNewOutlayCategoryBtn' class="btn btn-light btn-block">Add outlay category</button>
+              </label>
+            </div>
+            
         </div>
       </aside>
-      <footer>
+      <footer class="d-flex justify-content-center p-4">
         <div id="addNewIncomesOutlaysBtns">
-          <h2>Add</h2>
-          <button id='addNewIncomeBtn'>Add new income</button>
-          <button id='addNewOutlayBtn'>Add new outlay</button>
+          <button id='addNewIncomeBtn' class="btn btn-success btn-lg">Add new income</button>
+          <button id='addNewOutlayBtn' class="btn btn-danger btn-lg">Add new outlay</button>
         </div>
       </footer>
     </div>
-      <form id="addNewOutlay" class="modal">
-        <fieldset>
-          <legend>Add New Outlay</legend>
-          <label name='name'>Name: <input type="text" name='nameInput'></label>
-          <label name='date'>Date: <input type="date" name='dateInput'></label>
-          <label name='category'>Category: <select name="categoryInput" id='outlayCategoryInput'>
-          </select></label>
-          <label name='cost'>Outlay: <input type="number" min='1' name="costInput"><span class='currency'>BYN</span></label>
-          <label name='color'>Label color: <input type="color" name="colorInput"></label>
-          <input type="submit">
-        </fieldset>
+      <form id="addNewIncome" class="modal-form">
+        <div class="modal-form-container">
+          <div class="form-row m-0">
+            <h2 class="col-12 text-center">Add new income</h2>
+          </div>
+          <div class="form-row m-0 justify-content-center">
+            <div class="form-group m-1">
+              <label name='name'>Name: <input type="text" name='nameInput' class="form-control"></label>
+            </div>
+            <div class="form-group m-1">
+              <label name='date'>Date: <input type="date" name='dateInput' class="form-control"></label>
+            </div>
+            <div class="form-group m-1">
+              <label name='category'>Category: <select name="categoryInput" id='incomeCategoryInput' class="form-control"></select>
+              </select></label>
+            </div>
+            <div class="form-group m-1">
+              <label name='color'>Label color: <input type="color" name="colorInput" class="form-control"></label>
+            </div>
+          </div>
+          <div class="form-row m-0 justify-content-center">
+            <div class="form-group m-1">
+              <div class="input-group">
+                <input type="number" min='1' name="costInput" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="currency">BYN</span>
+                </div>
+              </div>  
+            </div>
+          </div>
+            
+          <div class="form-row m-0 justify-content-center">
+            <div class="form-group">
+              <button type="submit" class="btn btn-light btn-lg">Yep!</button>
+            </div>
+          </div>
+        </div>
+        
+        
       </form>
-      <form id="addNewIncome" class="modal">
-        <fieldset>
-          <legend>Add New Income</legend>
-          <label name='name'>Name: <input type="text" name='nameInput'></label>
-          <label name='date'>Date: <input type="date" name='dateInput'></label>
-          <label name='category'>Category: <select name="categoryInput" id='incomeCategoryInput'>
-          </select></label>
-          <label name='cost'>Income: <input type="number" min='1' name="costInput"><span class='currency'>BYN</span></label>
-          <label name='color'>Label color: <input type="color" name="colorInput"></label>
-          <input type="submit">
-        </fieldset>
-      </form>
+      
+      <form id="addNewOutlay" class="modal-form">
+        <div class="modal-form-container">
+          <div class="form-row m-0">
+            <h2 class="col-12 text-center">Add new outlay</h2>
+          </div>
+          <div class="form-row m-0 justify-content-center">
+            <div class="form-group m-1">
+              <label name='name'>Name: <input type="text" name='nameInput' class="form-control"></label>
+            </div>
+            <div class="form-group m-1">
+              <label name='date'>Date: <input type="date" name='dateInput' class="form-control"></label>
+            </div>
+            <div class="form-group m-1">
+              <label name='category'>Category: <select name="categoryInput" id='outlayCategoryInput' class="form-control"></select>
+              </select></label>
+            </div>
+            <div class="form-group m-1">
+              <label name='color'>Label color: <input type="color" name="colorInput" class="form-control"></label>
+            </div>
+          </div>
+          <div class="form-row m-0 justify-content-center">
+            <div class="form-group m-1">
+              <div class="input-group">
+                <input type="number" min='1' name="costInput" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="currency">BYN</span>
+                </div>
+              </div>  
+            </div>
+          </div>
+            
+          <div class="form-row m-0 justify-content-center">
+            <div class="form-group">
+              <button type="submit" class="btn btn-light btn-lg">Yep!</button>
+            </div>
+          </div>
+        </div>
+          
+          
+        </form>
     <script type="module" src="./scripts/main.js"></script>
   </body>
 </html>

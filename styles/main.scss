@@ -1,17 +1,2 @@
-form.modal{
-    display: none;
-    &.show{
-        display: block;
-    }
-}
-
-ul{
-    li.category{
-        ul li{
-            display: none;
-            &.show{
-                display: block;
-            }
-        }
-    }
-}
+@import 'style.scss'; 
+@import 'media.scss';

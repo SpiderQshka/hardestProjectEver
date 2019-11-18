@@ -107,7 +107,6 @@ class App{
         return this.currency;
     }
     setNewIncome(category, name, cost, date, color){
-        console.log(color)
         const categoryObject = this.incomes.filter(
             incCategory => incCategory.name === category
         )[0];
@@ -124,7 +123,6 @@ class App{
         this.setData()
     }
     setNewOutlay(category, name, cost, date, color){
-        console.log(color)
         const categoryObject = this.outlays.filter(
             incCategory => incCategory.name === category
         )[0];
@@ -136,7 +134,6 @@ class App{
                 color
             }
         )
-        // this.updateIncomes()
         this.filterDateAndDeleteUnused()
         this.updateBalance()
         this.setData()
@@ -146,12 +143,14 @@ class App{
             name,
             subitems: []
         })
+        this.setData()
     }
     setNewIncomeCategory(name){
         this.incomes.push({
             name,
             subitems: []
         })
+        this.setData()
     }
     isDateInRange(date, range){
         const dayMscds = 86400000;
