@@ -9,8 +9,6 @@ form.modal-form {
   height: 100%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
-  -webkit-transition: .7s;
-  transition: .7s;
 }
 
 form.modal-form .modal-form-content {

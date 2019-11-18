@@ -287,16 +287,25 @@ cancelNewOutlaySubmitBtn.onclick = () => {
 
 addNewIncomeCategoryBtn.onclick = () => {
     const v = addNewIncomeCategoryInput.value;
-    app.setNewIncomeCategory(v);
-    updateAll();
-    alert(`Категория "${v}" добавлена!`)
+    if(v){
+        app.setNewIncomeCategory(v);
+        updateAll();
+        alert(`Категория "${v}" добавлена!`)
+    } else {
+        alert('Введите название категории')
+    }
 }
 
 addNewOutlayCategoryBtn.onclick = () => {
     const v = addNewOutlayCategoryInput.value;
-    app.setNewOutlayCategory(v);
-    updateAll();
-    alert(`Категория "${v}" добавлена!`);
+    if(v){
+        app.setNewOutlayCategory(v);
+        updateAll();
+        alert(`Категория "${v}" добавлена!`);
+    } else {
+        alert('Введите название категории')
+    }
+    
 }
 
 addNewCategoriesHeader.onclick = () => {
