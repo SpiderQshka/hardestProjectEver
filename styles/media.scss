@@ -1,6 +1,14 @@
 @media all and (max-width: 850px){
     #main-container{
         max-width: calc(100% - 30px);
+        grid-template-areas: 
+            'header header'
+            'aside-left main'
+            'aside-right aside-right'
+            'footer footer';
+        grid-template-columns: 200px 1fr;
+        grid-template-rows: minmax(100px, auto) auto auto auto;
+        row-gap: 20px;
     }
 }
 @media all and (max-width: 650px){
@@ -8,11 +16,12 @@
         grid-template-areas:
             'header'
             'main'
-            'aside'
+            'aside-right'
+            'aside-left'
             'footer';
-        grid-template-rows: minmax(100px, auto) auto auto auto;
+        grid-template-rows: minmax(100px, auto) auto auto auto auto;
         grid-template-columns: 1fr;
-        row-gap: 20px;
+        // row-gap: 20px;
         #addNewIncomesOutlaysBtns{
             display: flex;
             flex-direction: column;

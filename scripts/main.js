@@ -20,12 +20,38 @@ const addNewIncomeCategoryInput = document.getElementById('addNewIncomeCategoryI
 const addNewOutlayCategoryInput = document.getElementById('addNewOutlayCategoryInput');
 const addNewIncomeCategoryBtn = document.getElementById('addNewIncomeCategoryBtn');
 const addNewOutlayCategoryBtn = document.getElementById('addNewOutlayCategoryBtn');
+const deleteIncomeCategoryInput = document.getElementById('deleteIncomeCategoryInput');
+const deleteOutlayCategoryInput = document.getElementById('deleteOutlayCategoryInput');
+const deleteCategoryHeader = document.getElementById('deleteCategoryHeader');
+const deleteIncomeCategoryBtn = document.getElementById('deleteIncomeCategoryBtn');
+const deleteOutlayCategoryBtn = document.getElementById('deleteOutlayCategoryBtn');
+const deleteCategoryBtns = document.getElementById('deleteCategoryBtns');
 const cancelNewOutlaySubmitBtn = document.getElementById('cancelNewOutlaySubmitBtn');
 const cancelNewIncomeSubmitBtn = document.getElementById('cancelNewIncomeSubmitBtn');
-const addNewCategories = document.getElementById('addNewCategories');
 const newCategoriesBtns = document.getElementById('newCategoriesBtns');
 const addNewCategoriesHeader = document.getElementById('addNewCategoriesHeader')
 const dateCheckboxInputs = [...document.querySelectorAll('#dateList .form-check-input')];
+const sortByForm = document.getElementById('sortByForm');
+const sortByFormHeader = document.getElementById('sortByFormHeader');
+const sortByCheckboxInputs = [...document.querySelectorAll('#sortByList .form-check-input')];
+
+sortByForm.onchange = e => {
+    sortByCheckboxInputs.forEach(
+        input => {
+            const liParent = input.parentNode.parentNode;
+            input.checked ? 
+                liParent.classList.add('active') : 
+                liParent.classList.remove('active')
+        }
+    )
+    app.sortByValue(e.target.value)
+    updateAll()
+}
+
+sortByFormHeader.onclick = () => {
+    sortByForm.classList.toggle('hide')
+    sortByFormHeader.classList.toggle('text-primary')
+}
 
 dateForm.onchange = e => {
     dateCheckboxInputs.forEach(
@@ -36,6 +62,8 @@ dateForm.onchange = e => {
                 liParent.classList.remove('active')
         }
     )
+    app.setDate(e.target.value)
+    updateAll()
 }
 
 dateFormHeader.onclick = () => {
@@ -57,7 +85,6 @@ const fillIncomesCategories = () => {
     incomes.forEach(
         category => {
             const li = document.createElement('li');
-            let sum = 0;
             li.classList.add('category', 'list-group-item')
             if(!!category.subitems.length){
                 const ul = document.createElement('ul');
@@ -90,11 +117,10 @@ const fillIncomesCategories = () => {
                          li.appendChild(deleteBtn)
                          li.classList.add('list-group-item', 'position-relative')
                          ul.appendChild(li);
-                         sum += +item.cost;
                     }
                 )
                 const text = document.createElement('p');
-                text.innerHTML = `${category.name} - ${sum} ${currentCurency}`;
+                text.innerHTML = `${category.name} - ${category.totalCost} ${currentCurency}`;
                 text.classList.add('mb-0', 'p-2')
                 li.prepend(text)
                 li.appendChild(ul);
@@ -264,11 +290,6 @@ addNewOutlayForm.addEventListener('submit', e => {
     }
 })
 
-dateForm.addEventListener('change', e => {
-    app.setDate(e.target.value)
-    updateAll()
-})
-
 addNewIncomeBtn.onclick = () => {
     addNewIncomeForm.classList.add('show')
 }
@@ -288,9 +309,12 @@ cancelNewOutlaySubmitBtn.onclick = () => {
 addNewIncomeCategoryBtn.onclick = () => {
     const v = addNewIncomeCategoryInput.value;
     if(v){
-        app.setNewIncomeCategory(v);
-        updateAll();
-        alert(`Категория "${v}" добавлена!`)
+        try{
+            app.setNewIncomeCategory(v);  
+          } catch(e) {
+              alert('Нельзя добавить уже существующую категорию')
+          }
+          updateAll();
     } else {
         alert('Введите название категории')
     }
@@ -299,9 +323,12 @@ addNewIncomeCategoryBtn.onclick = () => {
 addNewOutlayCategoryBtn.onclick = () => {
     const v = addNewOutlayCategoryInput.value;
     if(v){
-        app.setNewOutlayCategory(v);
+        try{
+          app.setNewOutlayCategory(v);  
+        } catch(e) {
+            alert('Нельзя добавить уже существующую категорию')
+        }
         updateAll();
-        alert(`Категория "${v}" добавлена!`);
     } else {
         alert('Введите название категории')
     }
@@ -311,4 +338,37 @@ addNewOutlayCategoryBtn.onclick = () => {
 addNewCategoriesHeader.onclick = () => {
     newCategoriesBtns.classList.toggle('hide')
     addNewCategoriesHeader.classList.toggle('text-primary')
+}
+
+deleteIncomeCategoryBtn.onclick = () => {
+    const v = deleteIncomeCategoryInput.value;
+    if(v){
+        try{
+            app.deleteIncomeCategory(v);
+        } catch(e) {
+            alert('Нельзя удалить единственную/несуществующую категорию')
+        }
+        updateAll();
+    } else {
+        alert('Введите название категории')
+    }
+}
+
+deleteOutlayCategoryBtn.onclick = () => {
+    const v = deleteOutlayCategoryInput.value;
+    if(v){
+        try{
+            app.deleteOutlayCategory(v);
+        } catch(e) {
+            alert('Нельзя удалить единственную/несуществующую категорию')
+        }
+        updateAll();
+    } else {
+        alert('Введите название категории')
+    }
+}
+
+deleteCategoryHeader.onclick = () => {
+    deleteCategoryBtns.classList.toggle('hide')
+    deleteCategoryHeader.classList.toggle('text-primary')
 }

@@ -1,17 +1,22 @@
 @media all and (max-width: 850px) {
   #main-container {
     max-width: calc(100% - 30px);
+        grid-template-areas: 'header header' 'aside-left main' 'aside-right aside-right' 'footer footer';
+    -ms-grid-columns: 200px 1fr;
+        grid-template-columns: 200px 1fr;
+    -ms-grid-rows: minmax(100px, auto) auto auto auto;
+        grid-template-rows: minmax(100px, auto) auto auto auto;
+    row-gap: 20px;
   }
 }
 
 @media all and (max-width: 650px) {
   #main-container {
-        grid-template-areas: 'header' 'main' 'aside' 'footer';
-    -ms-grid-rows: minmax(100px, auto) auto auto auto;
-        grid-template-rows: minmax(100px, auto) auto auto auto;
+        grid-template-areas: 'header' 'main' 'aside-right' 'aside-left' 'footer';
+    -ms-grid-rows: minmax(100px, auto) auto auto auto auto;
+        grid-template-rows: minmax(100px, auto) auto auto auto auto;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-    row-gap: 20px;
   }
   #main-container #addNewIncomesOutlaysBtns {
     display: -webkit-box;

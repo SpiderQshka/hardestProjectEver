@@ -43,14 +43,14 @@ ul{
 
 #main-container{
     display: grid;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0;
     grid-template-areas:
-        'header header'
-        'main aside'
-        'footer footer';
-    grid-template-columns: 1fr 250px;
+        'header header header'
+        'aside-left main aside-right'
+        'footer footer footer';
+    grid-template-columns: 250px 1fr 200px;
     grid-template-rows: 100px 1fr 100px;
     column-gap: 20px;
     header{
@@ -59,8 +59,11 @@ ul{
     main{
         grid-area: main;
     }
-    aside{
-        grid-area: aside;
+    aside#left{
+        grid-area: aside-left;
+    }
+    aside#right{
+        grid-area: aside-right;
     }
     footer{
         grid-area: footer;

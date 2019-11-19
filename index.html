@@ -26,7 +26,35 @@
           </ul>
         </div>
       </main>
-      <aside>
+      <aside id="left">
+          <div id="addNewCategories">
+            <h3 class="text-center pb-2 text-primary" id='addNewCategoriesHeader'>Добавить категорию</h3>
+            <div id="newCategoriesBtns" class="hide">
+              <label class="d-block">
+                <h4 class="text-center">Доход</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="Введите название категории"> 
+                <button id='addNewIncomeCategoryBtn' class="btn btn-success btn-block">Добавить</button>
+              </label>
+              <label class="d-block">
+                <h4 class="text-center">Расход</h4><input type="text" class="form-control mb-2" id='addNewOutlayCategoryInput' placeholder="Введите название категории"> 
+                <button id='addNewOutlayCategoryBtn' class="btn btn-success btn-block">Добавить</button>
+              </label>
+            </div>
+          </div>
+          <div id="deleteCategory">
+            <h3 class="text-center pb-2 mt-4 text-primary" id='deleteCategoryHeader'>Удалить категорию</h3>
+            <div id="deleteCategoryBtns" class="hide">
+              <label class="d-block">
+                <h4 class="text-center">Доход</h4><input type="text" class="form-control mb-2" id='deleteIncomeCategoryInput' placeholder="Введите название категории"> 
+                <button id='deleteIncomeCategoryBtn' class="btn btn-danger btn-block">Удалить</button>
+              </label>
+              <label class="d-block">
+                <h4 class="text-center">Расход</h4><input type="text" class="form-control mb-2" id='deleteOutlayCategoryInput' placeholder="Введите название категории"> 
+                <button id='deleteOutlayCategoryBtn' class="btn btn-danger btn-block">Удалить</button>
+              </label>
+            </div>
+          </div>
+      </aside>
+      <aside id='right'>
         <h2 class="text-center" id='dateFormHeader'>Дата</h2>
         <form name='dateForm' id='dateForm'>
         <ul id="dateList" class="list-unstyled list-group" role='group'>
@@ -57,19 +85,26 @@
           </li>
         </ul>
         </form>
-        <div id="addNewCategories">
-          <h3 class="text-center pt-4 pb-2 text-primary" id='addNewCategoriesHeader'>Добавить новую категорию</h3>
-          <div id="newCategoriesBtns" class="hide">
-            <label class="d-block">
-              <h4 class="text-center">Доход</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="Введите название категории"> 
-              <button id='addNewIncomeCategoryBtn' class="btn btn-primary btn-block">Добавить</button>
-            </label>
-            <label class="d-block">
-              <h4 class="text-center">Расход</h4><input type="text" class="form-control mb-2" id='addNewOutlayCategoryInput' placeholder="Введите название категории"> 
-              <button id='addNewOutlayCategoryBtn' class="btn btn-primary btn-block">Добавить</button>
-            </label>
-          </div>
-        </div>
+        <h2 class="text-center pt-4" id='sortByFormHeader'>Сортировать</h2>
+        <form name='sortByForm' id='sortByForm'>
+          <ul id="sortByList" class="list-unstyled list-group" role='group'>
+            <li class="list-group-item p-0">
+              <label class="form-check-label px-4 py-3 d-block text-center">
+                <input class="form-check-input sr-only" type="radio" value='cost' name="sortByInput" id="" autocomplete="off">По сумме
+              </label>
+            </li>
+            <li class="list-group-item p-0 active">            
+              <label class="form-check-label px-4 py-3 d-block text-center">
+                <input class="form-check-input sr-only" type="radio" value='date' name="sortByInput" id="" autocomplete="off" checked>По дате
+              </label>
+            </li>
+            <li class="list-group-item p-0 disabled">            
+              <label class="form-check-label px-4 py-3 d-block text-center">
+                <input class="form-check-input sr-only" type="radio" value='priority' name="sortByInput" id="" autocomplete="off" disabled>По приоритету
+              </label> 
+            </li>
+          </ul>
+        </form>
       </aside>
       <footer class="d-flex justify-content-center p-4">
         <div id="addNewIncomesOutlaysBtns">
@@ -114,53 +149,52 @@
             <button type="submit" class="btn btn-success btn-lg">Добавить</button>
           </div>
           <div class="form-group">
-            <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewIncomeSubmitBtn'>Отменить</button>
+            <button type="button" class="btn btn-danger btn-lg ml-1 ml-sm-2" id='cancelNewIncomeSubmitBtn'>Отменить</button>
           </div>
         </div>
       </div>
     </form>
-      
-      <form id="addNewOutlay" class="modal-form">
-        <div class="modal-form-content alert bg-light">
-          <div class="form-row m-0">
-            <h2 class="col-12 text-center py-4">Добавить новый расход</h2>
+    <form id="addNewOutlay" class="modal-form">
+      <div class="modal-form-content alert bg-light">
+        <div class="form-row m-0">
+          <h2 class="col-12 text-center py-4">Добавить новый расход</h2>
+        </div>
+        <div class="form-row m-0 justify-content-center">
+          <div class="form-group m-1">
+            <label name='name'>Название<input type="text" name='nameInput' class="form-control"></label>
           </div>
-          <div class="form-row m-0 justify-content-center">
-            <div class="form-group m-1">
-              <label name='name'>Название<input type="text" name='nameInput' class="form-control"></label>
-            </div>
-            <div class="form-group m-1">
-              <label name='date'>Дата<input type="date" name='dateInput' class="form-control"></label>
-            </div>
-            <div class="form-group m-1">
-              <label name='category'>Категория<select name="categoryInput" id='outlayCategoryInput' class="form-control"></select>
-              </select></label>
-            </div>
-            <div class="form-group m-1">
-              <label name='color'>Цвет лейбла<input type="color" name="colorInput" class="form-control"></label>
-            </div>
+          <div class="form-group m-1">
+            <label name='date'>Дата<input type="date" name='dateInput' class="form-control"></label>
           </div>
-          <div class="form-row m-0 justify-content-center">
-            <div class="form-group m-1">
-              <div class="input-group">
-                <input type="number" min='1' name="costInput" class="form-control">
-                <div class="input-group-append">
-                  <span class="input-group-text" id="currency">BYN</span>
-                </div>
-              </div>  
-            </div>
+          <div class="form-group m-1">
+            <label name='category'>Категория<select name="categoryInput" id='outlayCategoryInput' class="form-control"></select>
+            </select></label>
           </div>
-            
-          <div class="form-row my-3 justify-content-center">
-            <div class="form-group">
-              <button type="submit" class="btn btn-success btn-lg">Добавить</button>
-            </div>
-            <div class="form-group">
-              <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewOutlaySubmitBtn'>Отменить</button>
-            </div>
+          <div class="form-group m-1">
+            <label name='color'>Цвет лейбла<input type="color" name="colorInput" class="form-control"></label>
           </div>
         </div>
-      </form>
+        <div class="form-row m-0 justify-content-center">
+          <div class="form-group m-1">
+            <div class="input-group">
+              <input type="number" min='1' name="costInput" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text" id="currency">BYN</span>
+              </div>
+            </div>  
+          </div>
+        </div>
+          
+        <div class="form-row my-3 justify-content-center">
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg">Добавить</button>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-danger btn-lg ml-2" id='cancelNewOutlaySubmitBtn'>Отменить</button>
+          </div>
+        </div>
+      </div>
+    </form>
     <script type="module" src="./scripts/main.js"></script>
   </body>
 </html>
