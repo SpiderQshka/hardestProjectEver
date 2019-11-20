@@ -14,8 +14,8 @@
         <h1 class="text-center pt-2">Менеджер финансов</h1>
       </header>
       <main>
-        <div id="diagram">
-          <h2 class="text-center pb-4 mb-0" id='diagramHeader'>Диаграмма</h2>
+        <div id="diagram" class="text-center">
+          <button type='button' class="btn btn-light btn-block text-center mb-4 py-3 px-4 active" id='diagramHeader'><span class="h3">Диаграмма</span></button>
           <form class="btn-group btn-group-toggle w-100 mb-3" data-toggle="buttons" id='diagramForm'>
             <label class="btn btn-light">
               <input type="radio" name="diagramType" value="income" autocomplete="off">Доходы
@@ -24,12 +24,12 @@
               <input type="radio" name="diagramType" value="outlay" autocomplete="off" checked>Расходы
             </label>
           </form>
-          <div id="diagramCanvasContainer">
+          <div id="diagramCanvasContainer" class="m-2">
             <canvas id="diagramCanvas"></canvas>
           </div>
           <div id="diagramLegend"></div>
         </div>
-        <div><h2 class="text-center pb-4">Баланс: <span id="balance">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
+        <div><h2 class="text-center m-2">Баланс: <span id="balance">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
         <div id="outlays">
           <h2 class="text-center p-2 text-danger">Расходы</h2>
           <ul id="outlaysCategories" class="list-unstyled list-group">
@@ -43,7 +43,7 @@
       </main>
       <aside id="left">
           <div id="addNewCategories">
-            <h2 class="text-center pb-4 text-primary" id='addNewCategoriesHeader'>Добавить категорию</h2>
+            <button type='button' class="btn btn-light btn-block text-center mb-4 py-3 px-4" id='addNewCategoriesHeader'><span class="h3">Добавить категорию</span></button>
             <div id="newCategoriesBtns" class="hide">
               <label class="d-block">
                 <h4 class="text-center">Доход</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="Введите название категории"> 
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div id="deleteCategory">
-            <h2 class="text-center pb-4 mt-4 text-primary" id='deleteCategoryHeader'>Удалить категорию</h2>
+            <button type='button' class="btn btn-light btn-block text-center mb-4 py-3 px-4" id='deleteCategoryHeader'><span class="h3">Удалить категорию</span></button>
             <div id="deleteCategoryBtns" class="hide">
               <label class="d-block">
                 <h4 class="text-center">Доход</h4><input type="text" class="form-control mb-2" id='deleteIncomeCategoryInput' placeholder="Введите название категории"> 
@@ -70,56 +70,42 @@
           </div>
       </aside>
       <aside id='right'>
-        <h2 class="text-center pb-4 mb-0" id='dateFormHeader'>Дата</h2>
+        <button type='button' class="btn btn-light btn-block text-center mb-4 py-3 px-4 active" id='dateFormHeader'><span class="h3">Дата</span></button>
         <form name='dateForm' id='dateForm'>
-          <ul id="dateList" class="list-unstyled list-group" role='group'>
-            <li class="list-group-item p-0">
-              <label class="form-check-label px-4 py-3 d-block text-center">
-                <input class="form-check-input sr-only" type="radio" value='day' name="dateInput" id="" autocomplete="off">День
-              </label>
-            </li>
-            <li class="list-group-item p-0">            
-              <label class="form-check-label px-4 py-3 d-block text-center">
-                <input class="form-check-input sr-only" type="radio" value='week' name="dateInput" id="" autocomplete="off">Неделя
-              </label>
-            </li>
-            <li class="list-group-item p-0">            
-              <label class="form-check-label px-4 py-3 d-block text-center">
-                <input class="form-check-input sr-only" type="radio" value='month' name="dateInput" id="" autocomplete="off">Месяц
-              </label> 
-            </li>
-            <li class="list-group-item p-0">            
-              <label class="form-check-label px-4 py-3 d-block text-center">
-                <input class="form-check-input sr-only" type="radio" value='year' name="dateInput" id="" autocomplete="off">Год
-              </label>
-            </li>
-            <li class="list-group-item p-0 active">            
-              <label class="form-check-label px-4 py-3 d-block text-center">
-                <input class="form-check-input sr-only" type="radio" value='all' name="dateInput" id="" autocomplete="off" checked>Все
-              </label>
-            </li>
-            <li class="list-group-item p-0">            
-                <label class="form-check-label px-4 py-3 d-block text-center">
-                    <input class="form-check-input sr-only" type="radio" value='own' name="dateInput" id="" autocomplete="off">
-                    Выбрать дату<input class="form-control mt-3" type="date" name="ownDateInput" id="ownDateInput" autocomplete="off">
-                </label>
-              </li>
-          </ul>
+          
+          <label class="btn btn-light px-4 py-3 d-block text-center">
+            <input class="sr-only" type="radio" value='day' name="dateInput" id="" autocomplete="off">День
+          </label>
+
+          <label class="btn btn-light px-4 py-3 d-block text-center">
+            <input class="sr-only" type="radio" value='week' name="dateInput" id="" autocomplete="off">Неделя
+          </label>         
+          <label class="btn btn-light px-4 py-3 d-block text-center">
+            <input class="sr-only" type="radio" value='month' name="dateInput" id="" autocomplete="off">Месяц
+          </label> 
+    
+          <label class="btn btn-light px-4 py-3 d-block text-center">
+            <input class="sr-only" type="radio" value='year' name="dateInput" id="" autocomplete="off">Год
+          </label>
+      
+          <label class="btn btn-light px-4 py-3 d-block text-center active">
+            <input class="sr-only" type="radio" value='all' name="dateInput" id="" autocomplete="off" checked>Все
+          </label>
+      
+          <label class="btn btn-light px-4 py-3 d-block text-center">
+              <input class="sr-only" type="radio" value='own' name="dateInput" id="" autocomplete="off">
+              Выбрать дату<input class="form-control mt-3" type="date" name="ownDateInput" id="ownDateInput" autocomplete="off">
+          </label>
+
         </form>
-        <h2 class="text-center pt-4 pb-4 mb-0" id='sortByFormHeader'>Сортировать</h2>
+        <button type='button' class="btn btn-light btn-block text-center mb-4 mt-4 py-3 px-4 active" id='sortByFormHeader'><span class="h3">Сортировать</span></button>
         <form name='sortByForm' id='sortByForm'>
-          <ul id="sortByList" class="list-unstyled list-group" role='group'>
-            <li class="list-group-item p-0">
-              <label class="form-check-label px-4 py-3 d-block text-center">
-                <input class="form-check-input sr-only" type="radio" value='cost' name="sortByInput" id="" autocomplete="off">По сумме
+              <label class="btn btn-light px-4 py-3 d-block text-center">
+                <input class="sr-only" type="radio" value='cost' name="sortByInput" id="" autocomplete="off">По сумме
+              </label>          
+              <label class="btn btn-light px-4 py-3 d-block text-center active">
+                <input class="sr-only" type="radio" value='date' name="sortByInput" id="" autocomplete="off" checked>По дате
               </label>
-            </li>
-            <li class="list-group-item p-0 active">            
-              <label class="form-check-label px-4 py-3 d-block text-center">
-                <input class="form-check-input sr-only" type="radio" value='date' name="sortByInput" id="" autocomplete="off" checked>По дате
-              </label>
-            </li>
-          </ul>
         </form>
       </aside>
       <footer class="d-flex justify-content-center p-4">

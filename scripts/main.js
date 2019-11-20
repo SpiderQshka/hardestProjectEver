@@ -37,11 +37,11 @@ const cancelNewOutlaySubmitBtn = document.getElementById('cancelNewOutlaySubmitB
 const cancelNewIncomeSubmitBtn = document.getElementById('cancelNewIncomeSubmitBtn');
 const newCategoriesBtns = document.getElementById('newCategoriesBtns');
 const addNewCategoriesHeader = document.getElementById('addNewCategoriesHeader')
-const dateCheckboxInputs = [...document.querySelectorAll('#dateList .form-check-input')];
+const dateCheckboxInputs = [...document.querySelectorAll('#dateForm input')];
 const ownDateInput = document.getElementById('ownDateInput');
 const sortByForm = document.getElementById('sortByForm');
 const sortByFormHeader = document.getElementById('sortByFormHeader');
-const sortByCheckboxInputs = [...document.querySelectorAll('#sortByList .form-check-input')];
+const sortByCheckboxInputs = [...document.querySelectorAll('#sortByForm input')];
 const diagramHeader = document.getElementById('diagramHeader');
 const diagramCanvasContainer = document.getElementById('diagramCanvasContainer');
 const diagramForm = document.getElementById('diagramForm');
@@ -67,7 +67,7 @@ diagramForm.onchange = e => {
 sortByForm.onchange = e => {
     sortByCheckboxInputs.forEach(
         input => {
-            const liParent = input.parentNode.parentNode;
+            const liParent = input.parentNode;
             input.checked ? 
                 liParent.classList.add('active') : 
                 liParent.classList.remove('active')
@@ -79,7 +79,7 @@ sortByForm.onchange = e => {
 
 sortByFormHeader.onclick = () => {
     sortByForm.classList.toggle('hide')
-    sortByFormHeader.classList.toggle('text-primary')
+    sortByFormHeader.classList.toggle('active')
 }
 
 const currentCurency = app.getCurrency();
@@ -106,7 +106,7 @@ const fillIncomesCategories = () => {
     incomes.forEach(
         category => {
             const li = document.createElement('li');
-            li.classList.add('category', 'list-group-item')
+            li.classList.add('category', 'list-group-item', 'btn', 'btn-light', 'text-left', 'py-3', 'mb-2')
             if(!!category.subitems.length){
                 const ul = document.createElement('ul');
                 ul.classList.add('list-group');
@@ -136,13 +136,13 @@ const fillIncomesCategories = () => {
                          li.appendChild(cost);
                          li.appendChild(date);
                          li.appendChild(deleteBtn)
-                         li.classList.add('list-group-item', 'position-relative')
+                         li.classList.add('list-group-item', 'position-relative', 'mt-2', 'py-3', 'rounded')
                          ul.appendChild(li);
                     }
                 )
-                const text = document.createElement('p');
+                const text = document.createElement('h5');
                 text.innerHTML = `${category.name} - ${category.totalCost} ${currentCurency}`;
-                text.classList.add('mb-0', 'p-2')
+                text.classList.add('mb-0', 'p-2', 'text-center')
                 li.prepend(text)
                 li.appendChild(ul);
                 li.onclick = e => {
@@ -171,7 +171,7 @@ const fillOutlaysCategories = () => {
         category => {
             const li = document.createElement('li');
             let sum = 0;
-            li.classList.add('category', 'list-group-item')
+            li.classList.add('category', 'list-group-item', 'btn', 'btn-light', 'text-left', 'py-3', 'mb-2')
             if(!!category.subitems.length){
                 const ul = document.createElement('ul');
                 ul.classList.add('list-group');
@@ -201,14 +201,14 @@ const fillOutlaysCategories = () => {
                         li.appendChild(cost);
                         li.appendChild(date);
                         li.appendChild(deleteBtn)
-                        li.classList.add('list-group-item', 'position-relative')
+                        li.classList.add('list-group-item', 'position-relative', 'mt-2', 'py-3', 'rounded')
                         ul.appendChild(li);
                         sum += +item.cost;
                    }
                 )
-                const text = document.createElement('p');
+                const text = document.createElement('h5');
                 text.innerHTML = `${category.name} - ${sum} ${currentCurency}`;
-                text.classList.add('mb-0', 'p-2')
+                text.classList.add('mb-0', 'p-2', 'text-center')
                 li.prepend(text)
                 li.appendChild(ul);
                 li.onclick = e => {
@@ -287,7 +287,7 @@ dateForm.onchange = e => {
     let isOwnDateInputChecked;
     dateCheckboxInputs.forEach(
         input => {
-            const liParent = input.parentNode.parentNode;
+            const liParent = input.parentNode;
             if(input.checked){
                 liParent.classList.add('active')
                 input.value === 'own' ? 
@@ -310,7 +310,7 @@ dateForm.onchange = e => {
 
 dateFormHeader.onclick = () => {
     dateForm.classList.toggle('hide')
-    dateFormHeader.classList.toggle('text-primary')
+    dateFormHeader.classList.toggle('active')
 }
 
 addNewIncomeForm.addEventListener('submit', e => {
@@ -397,7 +397,7 @@ addNewOutlayCategoryBtn.onclick = () => {
 
 addNewCategoriesHeader.onclick = () => {
     newCategoriesBtns.classList.toggle('hide')
-    addNewCategoriesHeader.classList.toggle('text-primary')
+    addNewCategoriesHeader.classList.toggle('active')
 }
 
 deleteIncomeCategoryBtn.onclick = () => {
@@ -430,12 +430,12 @@ deleteOutlayCategoryBtn.onclick = () => {
 
 deleteCategoryHeader.onclick = () => {
     deleteCategoryBtns.classList.toggle('hide')
-    deleteCategoryHeader.classList.toggle('text-primary')
+    deleteCategoryHeader.classList.toggle('active')
 }
 
 diagramHeader.onclick = () => {
     diagramCanvasContainer.classList.toggle('hide');
     diagramLegend.classList.toggle('hide');
     diagramForm.classList.toggle('hide');
-    diagramHeader.classList.toggle('text-primary');
+    diagramHeader.classList.toggle('active');
 }
