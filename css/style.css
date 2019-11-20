@@ -35,7 +35,7 @@ ul li.category ul li.show {
 .delete-btn {
   position: absolute;
   right: 10px;
-  bottom: 15px;
+  bottom: 14px;
 }
 
 h1, h2, h3, h4, h5, h6, span, p, button, label, div {
@@ -54,8 +54,8 @@ h1, h2, h3, h4, h5, h6, span, p, button, label, div {
       grid-template-areas: 'header header header' 'aside-left main aside-right' 'footer footer footer';
   -ms-grid-columns: 250px 1fr 220px;
       grid-template-columns: 250px 1fr 220px;
-  -ms-grid-rows: 100px 1fr 100px;
-      grid-template-rows: 100px 1fr 100px;
+  -ms-grid-rows: auto 1fr 100px;
+      grid-template-rows: auto 1fr 100px;
   -webkit-column-gap: 20px;
           column-gap: 20px;
 }

@@ -11,10 +11,10 @@
   <body>
     <div id='main-container' class="shadow-lg p-4 rounded my-4">
       <header>
-        <h1 class="text-center pt-2">Менеджер финансов</h1>
+        <h1 class="text-center pt-2 pb-4 display-4">Менеджер финансов</h1>
       </header>
       <main>
-        <div id="diagram" class="text-center">
+        <div id="diagram">
           <button type='button' class="btn btn-light btn-block text-center mb-4 py-3 px-4 active" id='diagramHeader'><span class="h3">Диаграмма</span></button>
           <form class="btn-group btn-group-toggle w-100 mb-3" data-toggle="buttons" id='diagramForm'>
             <label class="btn btn-light">
@@ -27,7 +27,7 @@
           <div id="diagramCanvasContainer" class="m-2">
             <canvas id="diagramCanvas"></canvas>
           </div>
-          <div id="diagramLegend"></div>
+          <div id="diagramLegend" class="d-flex flex-wrap"></div>
         </div>
         <div><h2 class="text-center m-2">Баланс: <span id="balance">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
         <div id="outlays">

@@ -1,15 +1,6 @@
 import App from './app.js';
 import Diagram from './diagram.js'
 
-const diagramCanvas = document.getElementById('diagramCanvas');
-diagramCanvas.width = 200;
-diagramCanvas.height = 200;
-const diagramLegend = document.getElementById('diagramLegend');
-let outlayDiagramActive = true;
-
-const app = new App();
-app.init();
-
 const balance = document.getElementById('balance');
 const outlaysCategories = document.getElementById('outlaysCategories');
 const incomesCategories = document.getElementById('incomesCategories');
@@ -47,47 +38,20 @@ const diagramCanvasContainer = document.getElementById('diagramCanvasContainer')
 const diagramForm = document.getElementById('diagramForm');
 const diagramInputs = document.querySelectorAll('#diagramForm input')
 
-diagramForm.onchange = e => {
-    diagramInputs.forEach(
-        input => {
-            const liParent = input.parentNode;
-            if(input.checked){
-                liParent.classList.add('active');
-                input.value === 'income' ?
-                    outlayDiagramActive = false :
-                    outlayDiagramActive = true
-            } else {
-                liParent.classList.remove('active');
-            }
-        }
-    )
-    updateAll()
-}
+// ---------------------------------------
+// Инициализация модуля приложения
 
-sortByForm.onchange = e => {
-    sortByCheckboxInputs.forEach(
-        input => {
-            const liParent = input.parentNode;
-            input.checked ? 
-                liParent.classList.add('active') : 
-                liParent.classList.remove('active')
-        }
-    )
-    app.sortByValue(e.target.value)
-    updateAll()
-}
+const app = new App();
+app.init();
 
-sortByFormHeader.onclick = () => {
-    sortByForm.classList.toggle('hide')
-    sortByFormHeader.classList.toggle('active')
-}
+// ---------------------------------------
+// Начальная настройка диаграмыы
 
-const currentCurency = app.getCurrency();
-const currentDate = new Date();
-const currentDateInFormat = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
-
-addNewIncomeFormDateInput.value = currentDateInFormat;
-addNewOutlayFormDateInput.value = currentDateInFormat;
+const diagramCanvas = document.getElementById('diagramCanvas');
+diagramCanvas.width = 200;
+diagramCanvas.height = 200;
+const diagramLegend = document.getElementById('diagramLegend');
+let outlayDiagramActive = true;
 
 const diagram = new Diagram(
     {
@@ -99,6 +63,19 @@ const diagram = new Diagram(
 );
 
 diagram.draw()
+
+// ---------------------------------------
+// Установка текущей даты в модалки
+
+const currentCurency = app.getCurrency();
+const currentDate = new Date();
+const currentDateInFormat = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+
+addNewIncomeFormDateInput.value = currentDateInFormat;
+addNewOutlayFormDateInput.value = currentDateInFormat;
+
+// ---------------------------------------
+// Заполнение контентом
 
 const fillIncomesCategories = () => {
     incomesCategories.innerHTML = '';
@@ -281,7 +258,13 @@ const updateAll = () => {
     fillDiagram()
 }
 
+// ---------------------------------------
+// Функция обновления контента
+
 updateAll();
+
+// ---------------------------------------
+// Отслеживание и обработка нажатий
 
 dateForm.onchange = e => {
     let isOwnDateInputChecked;
@@ -313,7 +296,7 @@ dateFormHeader.onclick = () => {
     dateFormHeader.classList.toggle('active')
 }
 
-addNewIncomeForm.addEventListener('submit', e => {
+addNewIncomeForm.onsubmit = e => {
     e.preventDefault()
     const elements = e.target.elements;
     const [date, category, cost, name, color] =
@@ -329,10 +312,9 @@ addNewIncomeForm.addEventListener('submit', e => {
         updateAll()
         addNewIncomeForm.classList.remove('show')
     }
-    
-})
+}
 
-addNewOutlayForm.addEventListener('submit', e => {
+addNewOutlayForm.onsubmit = e => {
     e.preventDefault()
     const elements = e.target.elements;
     const [date, category, cost, name, color] =
@@ -348,7 +330,7 @@ addNewOutlayForm.addEventListener('submit', e => {
         updateAll()
         addNewOutlayForm.classList.remove('show')
     }
-})
+}
 
 addNewIncomeBtn.onclick = () => {
     addNewIncomeForm.classList.add('show')
@@ -439,3 +421,40 @@ diagramHeader.onclick = () => {
     diagramForm.classList.toggle('hide');
     diagramHeader.classList.toggle('active');
 }
+
+diagramForm.onchange = e => {
+    diagramInputs.forEach(
+        input => {
+            const liParent = input.parentNode;
+            if(input.checked){
+                liParent.classList.add('active');
+                input.value === 'income' ?
+                    outlayDiagramActive = false :
+                    outlayDiagramActive = true
+            } else {
+                liParent.classList.remove('active');
+            }
+        }
+    )
+    updateAll()
+}
+
+sortByForm.onchange = e => {
+    sortByCheckboxInputs.forEach(
+        input => {
+            const liParent = input.parentNode;
+            input.checked ? 
+                liParent.classList.add('active') : 
+                liParent.classList.remove('active')
+        }
+    )
+    app.sortByValue(e.target.value)
+    updateAll()
+}
+
+sortByFormHeader.onclick = () => {
+    sortByForm.classList.toggle('hide')
+    sortByFormHeader.classList.toggle('active')
+}
+
+// ---------------------------------------

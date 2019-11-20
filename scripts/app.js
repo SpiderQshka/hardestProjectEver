@@ -131,6 +131,7 @@ class App{
         this.filterDateAndDeleteUnused();
         this.setLastDate();
         this.updateBalance();
+        this.updateDataForShow();
     }
     updateBalance(){
         this.balance = this.incomesForShow.reduce(
