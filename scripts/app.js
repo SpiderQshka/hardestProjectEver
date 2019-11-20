@@ -67,6 +67,7 @@ class App{
         this.balance = 0;
         this.currency = 'BYN'
         this.dateForShow = 'all';
+        this.ownDate = null;
         this.sortBy = 'date';
     }
     loadData(){
@@ -153,9 +154,6 @@ class App{
                 break;
             case('cost'):
                 this.sortByCost();
-                break;
-            case('popularity'):
-                console.log('Hmm');
                 break;
         }
         this.updateBalance();
@@ -308,23 +306,30 @@ class App{
         this.updateDataForShow();
         this.setData()
     }
-    isDateInRange(date, range){
+    isDateInRange(time, range){
         const dayMscds = 86400000;
         switch(range){
             case('day'):
-                return date < dayMscds
+                return time < dayMscds
             case('week'):
-                return date < dayMscds * 7
+                return time < dayMscds * 7
             case('month'):
-                return date < dayMscds * 30
+                return time < dayMscds * 30
             case('year'):
-                return date < dayMscds * 365
+                return time < dayMscds * 365
             case('all'):
                 return true;
+            case('own'):
+                if(this.ownDate){
+                    const timeFromDateToNow = Date.now() - new Date(this.ownDate).getTime();
+                    return time === timeFromDateToNow
+                }
+                return false;
         }
     }
-    setDate(date){
+    setDate(date, value = null){
         this.dateForShow = date;
+        this.ownDate = value;
         this.updateDataForShow();
     }
     filterDateAndDeleteUnused(){
@@ -332,16 +337,21 @@ class App{
         this.outlaysForShow =
         this.outlays.map(
             category => {
+                let totalCost = 0;
                 return {
                     name: category.name,
-                    totalCost: category.totalCost,
                     lastDate: category.lastDate,
                     subitems: category.subitems.filter(
                         item => {
                             const itemDate = new Date(item.date);
-                            return this.isDateInRange(Date.now() - itemDate.getTime(), this.dateForShow)
+                            if(this.isDateInRange(Date.now() - itemDate.getTime(), this.dateForShow)){
+                                totalCost += +item.cost;
+                                return true;
+                            }
+                            return false;
                         }
-                    ) 
+                    ),
+                    totalCost
                 }
             }        
         )
@@ -349,16 +359,21 @@ class App{
         this.incomesForShow =
             this.incomes.map(
                 category => {
+                    let totalCost = 0;
                     return {
                         name: category.name,
-                        totalCost: category.totalCost,
                         lastDate: category.lastDate,
                         subitems: category.subitems.filter(
                             item => {
                                 const itemDate = new Date(item.date);
-                                return this.isDateInRange(Date.now() - itemDate.getTime(), this.dateForShow)
+                                if(this.isDateInRange(Date.now() - itemDate.getTime(), this.dateForShow)){
+                                    totalCost += +item.cost;
+                                    return true;
+                                }
+                                return false;
                             }
-                        ) 
+                        ),
+                        totalCost
                     }
                 }  
             )

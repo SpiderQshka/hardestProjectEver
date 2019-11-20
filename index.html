@@ -14,7 +14,22 @@
         <h1 class="text-center pt-2">Менеджер финансов</h1>
       </header>
       <main>
-        <div><h2 class="text-center pb-2">Баланс: <span id="balance">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
+        <div id="diagram">
+          <h2 class="text-center pb-4 mb-0" id='diagramHeader'>Диаграмма</h2>
+          <form class="btn-group btn-group-toggle w-100 mb-3" data-toggle="buttons" id='diagramForm'>
+            <label class="btn btn-light">
+              <input type="radio" name="diagramType" value="income" autocomplete="off">Доходы
+            </label>
+            <label class="btn btn-light active">
+              <input type="radio" name="diagramType" value="outlay" autocomplete="off" checked>Расходы
+            </label>
+          </form>
+          <div id="diagramCanvasContainer">
+            <canvas id="diagramCanvas"></canvas>
+          </div>
+          <div id="diagramLegend"></div>
+        </div>
+        <div><h2 class="text-center pb-4">Баланс: <span id="balance">100</span> <span class="currency">BYN</span></h2 class="text-center"></div>
         <div id="outlays">
           <h2 class="text-center p-2 text-danger">Расходы</h2>
           <ul id="outlaysCategories" class="list-unstyled list-group">
@@ -28,7 +43,7 @@
       </main>
       <aside id="left">
           <div id="addNewCategories">
-            <h3 class="text-center pb-2 text-primary" id='addNewCategoriesHeader'>Добавить категорию</h3>
+            <h2 class="text-center pb-4 text-primary" id='addNewCategoriesHeader'>Добавить категорию</h2>
             <div id="newCategoriesBtns" class="hide">
               <label class="d-block">
                 <h4 class="text-center">Доход</h4><input type="text" class="form-control mb-2" id='addNewIncomeCategoryInput' placeholder="Введите название категории"> 
@@ -41,7 +56,7 @@
             </div>
           </div>
           <div id="deleteCategory">
-            <h3 class="text-center pb-2 mt-4 text-primary" id='deleteCategoryHeader'>Удалить категорию</h3>
+            <h2 class="text-center pb-4 mt-4 text-primary" id='deleteCategoryHeader'>Удалить категорию</h2>
             <div id="deleteCategoryBtns" class="hide">
               <label class="d-block">
                 <h4 class="text-center">Доход</h4><input type="text" class="form-control mb-2" id='deleteIncomeCategoryInput' placeholder="Введите название категории"> 
@@ -55,37 +70,43 @@
           </div>
       </aside>
       <aside id='right'>
-        <h2 class="text-center" id='dateFormHeader'>Дата</h2>
+        <h2 class="text-center pb-4 mb-0" id='dateFormHeader'>Дата</h2>
         <form name='dateForm' id='dateForm'>
-        <ul id="dateList" class="list-unstyled list-group" role='group'>
-          <li class="list-group-item p-0">
-            <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='day' name="dateInput" id="" autocomplete="off">День
-            </label>
-          </li>
-          <li class="list-group-item p-0">            
-            <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='week' name="dateInput" id="" autocomplete="off">Неделя
-            </label>
-          </li>
-          <li class="list-group-item p-0">            
-            <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='month' name="dateInput" id="" autocomplete="off">Месяц
-            </label> 
-          </li>
-          <li class="list-group-item p-0">            
-            <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='year' name="dateInput" id="" autocomplete="off">Год
-            </label>
-          </li>
-          <li class="list-group-item p-0 active">            
-            <label class="form-check-label px-4 py-3 d-block text-center">
-              <input class="form-check-input sr-only" type="radio" value='all' name="dateInput" id="" autocomplete="off" checked>Все
-            </label>
-          </li>
-        </ul>
+          <ul id="dateList" class="list-unstyled list-group" role='group'>
+            <li class="list-group-item p-0">
+              <label class="form-check-label px-4 py-3 d-block text-center">
+                <input class="form-check-input sr-only" type="radio" value='day' name="dateInput" id="" autocomplete="off">День
+              </label>
+            </li>
+            <li class="list-group-item p-0">            
+              <label class="form-check-label px-4 py-3 d-block text-center">
+                <input class="form-check-input sr-only" type="radio" value='week' name="dateInput" id="" autocomplete="off">Неделя
+              </label>
+            </li>
+            <li class="list-group-item p-0">            
+              <label class="form-check-label px-4 py-3 d-block text-center">
+                <input class="form-check-input sr-only" type="radio" value='month' name="dateInput" id="" autocomplete="off">Месяц
+              </label> 
+            </li>
+            <li class="list-group-item p-0">            
+              <label class="form-check-label px-4 py-3 d-block text-center">
+                <input class="form-check-input sr-only" type="radio" value='year' name="dateInput" id="" autocomplete="off">Год
+              </label>
+            </li>
+            <li class="list-group-item p-0 active">            
+              <label class="form-check-label px-4 py-3 d-block text-center">
+                <input class="form-check-input sr-only" type="radio" value='all' name="dateInput" id="" autocomplete="off" checked>Все
+              </label>
+            </li>
+            <li class="list-group-item p-0">            
+                <label class="form-check-label px-4 py-3 d-block text-center">
+                    <input class="form-check-input sr-only" type="radio" value='own' name="dateInput" id="" autocomplete="off">
+                    Выбрать дату<input class="form-control mt-3" type="date" name="ownDateInput" id="ownDateInput" autocomplete="off">
+                </label>
+              </li>
+          </ul>
         </form>
-        <h2 class="text-center pt-4" id='sortByFormHeader'>Сортировать</h2>
+        <h2 class="text-center pt-4 pb-4 mb-0" id='sortByFormHeader'>Сортировать</h2>
         <form name='sortByForm' id='sortByForm'>
           <ul id="sortByList" class="list-unstyled list-group" role='group'>
             <li class="list-group-item p-0">
@@ -97,11 +118,6 @@
               <label class="form-check-label px-4 py-3 d-block text-center">
                 <input class="form-check-input sr-only" type="radio" value='date' name="sortByInput" id="" autocomplete="off" checked>По дате
               </label>
-            </li>
-            <li class="list-group-item p-0 disabled">            
-              <label class="form-check-label px-4 py-3 d-block text-center">
-                <input class="form-check-input sr-only" type="radio" value='priority' name="sortByInput" id="" autocomplete="off" disabled>По приоритету
-              </label> 
             </li>
           </ul>
         </form>

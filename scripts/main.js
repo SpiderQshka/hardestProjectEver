@@ -1,4 +1,11 @@
 import App from './app.js';
+import Diagram from './diagram.js'
+
+const diagramCanvas = document.getElementById('diagramCanvas');
+diagramCanvas.width = 200;
+diagramCanvas.height = 200;
+const diagramLegend = document.getElementById('diagramLegend');
+let outlayDiagramActive = true;
 
 const app = new App();
 app.init();
@@ -31,9 +38,31 @@ const cancelNewIncomeSubmitBtn = document.getElementById('cancelNewIncomeSubmitB
 const newCategoriesBtns = document.getElementById('newCategoriesBtns');
 const addNewCategoriesHeader = document.getElementById('addNewCategoriesHeader')
 const dateCheckboxInputs = [...document.querySelectorAll('#dateList .form-check-input')];
+const ownDateInput = document.getElementById('ownDateInput');
 const sortByForm = document.getElementById('sortByForm');
 const sortByFormHeader = document.getElementById('sortByFormHeader');
 const sortByCheckboxInputs = [...document.querySelectorAll('#sortByList .form-check-input')];
+const diagramHeader = document.getElementById('diagramHeader');
+const diagramCanvasContainer = document.getElementById('diagramCanvasContainer');
+const diagramForm = document.getElementById('diagramForm');
+const diagramInputs = document.querySelectorAll('#diagramForm input')
+
+diagramForm.onchange = e => {
+    diagramInputs.forEach(
+        input => {
+            const liParent = input.parentNode;
+            if(input.checked){
+                liParent.classList.add('active');
+                input.value === 'income' ?
+                    outlayDiagramActive = false :
+                    outlayDiagramActive = true
+            } else {
+                liParent.classList.remove('active');
+            }
+        }
+    )
+    updateAll()
+}
 
 sortByForm.onchange = e => {
     sortByCheckboxInputs.forEach(
@@ -53,31 +82,23 @@ sortByFormHeader.onclick = () => {
     sortByFormHeader.classList.toggle('text-primary')
 }
 
-dateForm.onchange = e => {
-    dateCheckboxInputs.forEach(
-        input => {
-            const liParent = input.parentNode.parentNode;
-            input.checked ? 
-                liParent.classList.add('active') : 
-                liParent.classList.remove('active')
-        }
-    )
-    app.setDate(e.target.value)
-    updateAll()
-}
-
-dateFormHeader.onclick = () => {
-    dateForm.classList.toggle('hide')
-    dateFormHeader.classList.toggle('text-primary')
-}
-    
-
 const currentCurency = app.getCurrency();
 const currentDate = new Date();
 const currentDateInFormat = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
 
 addNewIncomeFormDateInput.value = currentDateInFormat;
 addNewOutlayFormDateInput.value = currentDateInFormat;
+
+const diagram = new Diagram(
+    {
+        canvas: diagramCanvas,
+        doughnutHoleSize: 0.5,
+        legend: diagramLegend,
+        data: app.getOutlaysForShow()
+    }
+);
+
+diagram.draw()
 
 const fillIncomesCategories = () => {
     incomesCategories.innerHTML = '';
@@ -138,7 +159,7 @@ const fillIncomesCategories = () => {
     if(!incomes.length){
         const infoText = document.createElement('p');
         infoText.classList.add('text-center')
-        infoText.innerHTML = "Похоже, у вас нет доходов. Понимаю.."
+        infoText.innerHTML = "Похоже, у вас нет доходов. Понимаю..."
         incomesCategories.appendChild(infoText)
     }
 }
@@ -204,7 +225,7 @@ const fillOutlaysCategories = () => {
     if(!outlays.length){
         const infoText = document.createElement('p');
         infoText.classList.add('text-center')
-        infoText.innerHTML = "Похоже, у вас нет расходов. Ещё.."
+        infoText.innerHTML = "Похоже, у вас нет расходов. Ещё..."
         outlaysCategories.appendChild(infoText)
     }
 }
@@ -243,15 +264,54 @@ const fillBalance = () => {
     balance.innerHTML = app.getBalance()
 }
 
+const fillDiagram = () => {
+    const data = outlayDiagramActive ?
+        app.getOutlaysForShow() :
+        app.getIncomesForShow();
+
+    diagram.draw(data)
+}
+
 const updateAll = () => {
     fillIncomesCategories()
     fillOutlaysCategories()
     fillOutlaysCategoryInput()
     fillIncomesCategoryInput()
     fillBalance()
+    fillDiagram()
 }
 
 updateAll();
+
+dateForm.onchange = e => {
+    let isOwnDateInputChecked;
+    dateCheckboxInputs.forEach(
+        input => {
+            const liParent = input.parentNode.parentNode;
+            if(input.checked){
+                liParent.classList.add('active')
+                input.value === 'own' ? 
+                    isOwnDateInputChecked = true :
+                    isOwnDateInputChecked = false;
+            } else {
+                liParent.classList.remove('active')
+            }      
+        }
+    )
+
+    if(isOwnDateInputChecked && ownDateInput.value){
+        app.setDate('own', ownDateInput.value)
+    } else {
+        app.setDate(e.target.value) 
+    }
+    
+    updateAll()
+}
+
+dateFormHeader.onclick = () => {
+    dateForm.classList.toggle('hide')
+    dateFormHeader.classList.toggle('text-primary')
+}
 
 addNewIncomeForm.addEventListener('submit', e => {
     e.preventDefault()
@@ -371,4 +431,11 @@ deleteOutlayCategoryBtn.onclick = () => {
 deleteCategoryHeader.onclick = () => {
     deleteCategoryBtns.classList.toggle('hide')
     deleteCategoryHeader.classList.toggle('text-primary')
+}
+
+diagramHeader.onclick = () => {
+    diagramCanvasContainer.classList.toggle('hide');
+    diagramLegend.classList.toggle('hide');
+    diagramForm.classList.toggle('hide');
+    diagramHeader.classList.toggle('text-primary');
 }
