@@ -56,7 +56,7 @@ let outlayDiagramActive = true;
 const diagram = new Diagram(
     {
         canvas: diagramCanvas,
-        doughnutHoleSize: 0.5,
+        doughnutHoleSize: 0.6,
         legend: diagramLegend,
         data: app.getOutlaysForShow()
     }
